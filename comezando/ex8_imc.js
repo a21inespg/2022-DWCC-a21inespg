@@ -1,3 +1,5 @@
+"use strict";
+
 let pesoP1 = parseInt(prompt("Peso persoa 1 (kg)"));
 let alturaP1 = parseFloat(prompt("Altura persoa 1  (en cm)"));
 console.log(typeof pesoP1 + " é o tipo de dato");

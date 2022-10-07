@@ -13,12 +13,12 @@ for (let i = 0; i < arrayNums.length; i++) {
 }
 
 console.log("Bulce for-in");
-for (numero in arrayNums) {
+for (let numero in arrayNums) {
   console.log(numero);
 }
 
 console.log("Bucle for-of");
-for (numero of arrayNums) {
+for (let numero of arrayNums) {
   console.log(numero);
 }
 
