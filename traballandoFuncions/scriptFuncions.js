@@ -9,7 +9,7 @@
 
 // // ***EXERCICIO 2 - ARRAY ELEMENTOS IMPARES***
 
-// function numsImpares(array) {
+// function numsImpares(arrayEntrada) {
 //   let arraySaida = [];
 //   for (let i = 0; i < arrayEntrada.length; i++) {
 //     if (arrayEntrada[i] % 2 != 0) {
@@ -82,93 +82,339 @@
 
 // letraDni("53614755F");
 
-// EXERCICIO 6 - ARRAY BIDIMENSIONAL
+// // EXERCICIO 6 - ARRAY BIDIMENSIONAL
 
-function buscaminas(entrada) {
-  let arraySaida = [];
+// function buscaminas(entrada) {
+//   let arraySaida = [];
 
-  for (let i = 0; i < entrada.length; i++) {
-    arraySaida[i] = [];
-    let contador = 0;
-    console.log("");
-    for (let j = 0; j < entrada[i].length; j++) {
-      if (entrada[i][j] == 0) {
-        arraySaida[i][j] = 0;
-        if (i == 0 && j == 0) {
-          console.log("é un 0");
+//   for (let i = 0; i < entrada.length; i++) {
+//     arraySaida[i] = [];
+//     let contador = 0;
+//     console.log("");
+//     for (let j = 0; j < entrada[i].length; j++) {
+//       if (entrada[i][j] == 0) {
+//         arraySaida[i][j] = 0;
+//         if (i == 0 && j == 0) {
+//           console.log("é un 0");
 
-          if (entrada[i + 1][j] == -1) {
-            contador = contador + 1;
-          }
-          if (entrada[i][j + 1] == -1) {
-            contador = contador + 1;
-          }
-          if (entrada[i + 1][j + 1] == -1) {
-            contador = contador + 1;
-          }
-          if (entrada[i + 1][j] == -1) {
-            contador = contador + 1;
-          }
+//           if (entrada[i + 1][j] == -1) {
+//             contador = contador + 1;
+//           }
+//           if (entrada[i][j + 1] == -1) {
+//             contador = contador + 1;
+//           }
+//           if (entrada[i + 1][j + 1] == -1) {
+//             contador = contador + 1;
+//           }
+//           if (entrada[i + 1][j] == -1) {
+//             contador = contador + 1;
+//           }
 
-          arraySaida[i][j] = contador;
-        }
+//           arraySaida[i][j] = contador;
+//         }
 
-        if (i == 0 && j < entrada[i].length && j > 0) {
-          contador = 0;
-          if (entrada[i + 1][j] == -1) {
-            contador = contador + 1;
-          }
-          if (entrada[i][j + 1] == -1) {
-            contador = contador + 1;
-          }
-          if (entrada[i + 1][j + 1] == -1) {
-            contador = contador + 1;
-          }
+//         if (i == 0 && j < entrada[i].length - 1 && j > 0) {
+//           contador = 0;
+//           if (entrada[i + 1][j] == -1) {
+//             contador = contador + 1;
+//           }
+//           if (entrada[i][j + 1] == -1) {
+//             contador = contador + 1;
+//           }
+//           if (entrada[i + 1][j + 1] == -1) {
+//             contador = contador + 1;
+//           }
 
-          if (entrada[i + 1][j - 1] == -1) {
-            contador = contador + 1;
-          }
+//           if (entrada[i + 1][j - 1] == -1) {
+//             contador = contador + 1;
+//           }
 
-          if (entrada[i][j - 1] == -1) {
-            contador = contador + 1;
-          }
-          console.log("i: " + i);
-          console.log("j: " + j);
-          console.log("contador: " + contador);
-          arraySaida[i][j] = contador;
-        }
+//           if (entrada[i][j - 1] == -1) {
+//             contador = contador + 1;
+//           }
+//           console.log("i: " + i);
+//           console.log("j: " + j);
+//           console.log("contador: " + contador);
+//           arraySaida[i][j] = contador;
+//         }
 
-        if (i == entrada.length && j == 0) {
-          if (entrada[i - 1][j] == -1) {
-            contador = contador + 1;
-          }
-          if (entrada[i][j + 1] == -1) {
-            contador = contador + 1;
-          }
-          if (entrada[i - 1][j + 1] == -1) {
-            contador = contador + 1;
-          }
-        }
-      } else {
-        arraySaida[i][j] = -1;
-      }
-    }
+//         if (i == entrada.length - 1 && j == 0) {
+//           contador = 0;
+//           if (entrada[i - 1][j] == -1) {
+//             contador = contador + 1;
+//           }
+//           if (entrada[i][j + 1] == -1) {
+//             contador = contador + 1;
+//           }
+//           if (entrada[i - 1][j + 1] == -1) {
+//             contador = contador + 1;
+//           }
+//           arraySaida[i][j] = contador;
+//         }
+
+//         if (i < entrada.length - 1 && i > 0 && j == 0) {
+//           contador = 0;
+//           if (entrada[i - 1][j] == -1) {
+//             contador = contador + 1;
+//           }
+//           if (entrada[i][j + 1] == -1) {
+//             contador = contador + 1;
+//           }
+//           if (entrada[i - 1][j + 1] == -1) {
+//             contador = contador + 1;
+//           }
+
+//           if (entrada[i + 1][j + 1] == -1) {
+//             contador = contador + 1;
+//           }
+//           if (entrada[i + 1][j] == -1) {
+//             contador = contador + 1;
+//           }
+//           arraySaida[i][j] = contador;
+//         }
+
+//         if (i == 0 && j == entrada[i].length - 1) {
+//           contador = 0;
+//           if (entrada[i + 1][j] == -1) {
+//             contador = contador + 1;
+//           }
+//           if (entrada[i][j - 1] == -1) {
+//             contador = contador + 1;
+//           }
+
+//           if (entrada[i + 1][j - 1] == -1) {
+//             contador = contador + 1;
+//           }
+//           arraySaida[i][j] = contador;
+//         }
+
+//         if (i < entrada.length - 1 && i > 0 && j == entrada[i].length - 1) {
+//           contador = 0;
+//           if (entrada[i - 1][j] == -1) {
+//             contador = contador + 1;
+//           }
+//           if (entrada[i][j - 1] == -1) {
+//             contador = contador + 1;
+//           }
+//           if (entrada[i - 1][j - 1] == -1) {
+//             contador = contador + 1;
+//           }
+
+//           if (entrada[i + 1][j - 1] == -1) {
+//             contador = contador + 1;
+//           }
+//           if (entrada[i + 1][j] == -1) {
+//             contador = contador + 1;
+//           }
+//           arraySaida[i][j] = contador;
+//         }
+
+//         if (i == entrada.length - 1 && j == entrada[i].length - 1) {
+//           contador = 0;
+//           if (entrada[i - 1][j] == -1) {
+//             contador = contador + 1;
+//           }
+//           if (entrada[i - 1][j - 1] == -1) {
+//             contador = contador + 1;
+//           }
+//           if (entrada[i][j - 1] == -1) {
+//             contador = contador + 1;
+//           }
+
+//           arraySaida[i][j] = contador;
+//         }
+
+//         if (i == entrada.length - 1 && j < entrada[i].length - 1 && j > 0) {
+//           contador = 0;
+//           if (entrada[i - 1][j] == -1) {
+//             contador = contador + 1;
+//           }
+//           if (entrada[i - 1][j - 1] == -1) {
+//             contador = contador + 1;
+//           }
+//           if (entrada[i][j - 1] == -1) {
+//             contador = contador + 1;
+//           }
+//           if (entrada[i][j + 1] == -1) {
+//             contador = contador + 1;
+//           }
+//           if (entrada[i - 1][j + 1] == -1) {
+//             contador = contador + 1;
+//           }
+
+//           arraySaida[i][j] = contador;
+//         }
+
+//         if (
+//           i < entrada.length - 1 &&
+//           i > 0 &&
+//           j < entrada[i].length - 1 &&
+//           j > 0
+//         ) {
+//           contador = 0;
+//           if (entrada[i - 1][j] == -1) {
+//             contador = contador + 1;
+//           }
+//           if (entrada[i - 1][j - 1] == -1) {
+//             contador = contador + 1;
+//           }
+//           if (entrada[i - 1][j + 1] == -1) {
+//             contador = contador + 1;
+//           }
+//           if (entrada[i][j - 1] == -1) {
+//             contador = contador + 1;
+//           }
+//           if (entrada[i][j + 1] == -1) {
+//             contador = contador + 1;
+//           }
+//           if (entrada[i + 1][j + 1] == -1) {
+//             contador = contador + 1;
+//           }
+
+//           if (entrada[i + 1][j] == -1) {
+//             contador = contador + 1;
+//           }
+
+//           if (entrada[i + 1][j - 1] == -1) {
+//             contador = contador + 1;
+//           }
+
+//           arraySaida[i][j] = contador;
+//         }
+//       } else {
+//         arraySaida[i][j] = -1;
+//       }
+//     }
+//   }
+//   return arraySaida;
+// }
+
+// arrayEntrada = [
+//   [0, 0, -1, 0],
+//   [0, 0, -1, 0],
+//   [0, -1, -1, 0],
+// ];
+// console.log(arrayEntrada);
+// arraySaida = buscaminas(arrayEntrada);
+// console.log("empezamos a percorrer a resposta");
+// console.log(arraySaida);
+// // for (let i = 0; i < arraySaida.length; i++) {
+// //   console.log("");
+// //   for (let j = 0; j < arraySaida[i].length; j++) {
+// //     console.log("numero");
+// //     console.log(arraySaida[i][j]);
+// //   }
+// // }
+
+// EXERCICIO 7
+function axendarReunion(horaInicioReunion, duracionMinutos) {
+  const inicioXornada = "07:30";
+  const finalXornada = "17:45";
+
+  // Extraio hora e min do inicio da xornada
+  const splitInicioXor = inicioXornada.split(":");
+  const horaInicioXor = parseInt(splitInicioXor[0]);
+  const minInicioXor = parseInt(splitInicioXor[1]);
+
+  // Extraio hora e min do final da xornada
+  const splitFinXor = finalXornada.split(":");
+  const horaFinXor = parseInt(splitFinXor[0]);
+  const minFinXor = parseInt(splitFinXor[1]);
+
+  // Extraio hora e min do inicio da reunión
+  const splitReunion = horaInicioReunion.split(":");
+  const horaIniReunion = parseInt(splitReunion[0]);
+  const minIniReunion = parseInt(splitReunion[1]);
+
+  // Calculo a hora de fin da reunión:
+  let hora = 0;
+  let minutos = duracionMinutos;
+  if (duracionMinutos >= 60) {
+    hora = parseInt(duracionMinutos / 60);
+    minutos = parseInt(duracionMinutos % 60);
   }
-  return arraySaida;
+
+  let horafinReunion = parseInt(horaIniReunion) + hora;
+  let minFinReunion = parseInt(minIniReunion) + minutos;
+
+  if (minFinReunion >= 60) {
+    horafinReunion = horafinReunion + parseInt(minFinReunion / 60);
+    minFinReunion = minFinReunion % 60;
+  }
+  // console.log("Hora comzo reunion: " + horaIniReunion);
+  // console.log("Min comezo reunion: " + minIniReunion);
+  // console.log("A reunión terminas ás " + horafinReunion + ":" + minFinReunion);
+  // Comprobacións:
+
+  if (horaIniReunion == horaInicioXor) {
+    if (minIniReunion >= minInicioXor) {
+      // console.log("A hora de comezo non se sae do horario");
+      return comprbarFin(horafinReunion, horaFinXor, minFinReunion, minFinXor);
+    } else {
+      // console.log("A hora e igual, pero polos minutos mal");
+      return false;
+    }
+  } else if (horaIniReunion == horaFinXor) {
+    if (minIniReunion <= minFinXor) {
+      // console.log("A hora de comezo non se sae do horario");
+      return comprbarFin(horafinReunion, horaFinXor, minFinReunion, minFinXor);
+    } else {
+      // console.log("A hora e igual, pero polos minutos mal");
+      return false;
+    }
+  } else if (horaIniReunion > horaInicioXor && horaIniReunion < horaFinXor) {
+    // console.log("A hora de comezo non se sae do horario");
+    return comprbarFin(horafinReunion, horaFinXor, minFinReunion, minFinXor);
+  } else {
+    // console.log("Error na hora");
+    return false;
+  }
 }
 
-arrayEntrada = [
-  [0, 0, -1, 0],
-  [0, -1, -1, 0],
-];
+function comprbarFin(horafinReunion, horaFinXor, minFinReunion, minFinXor) {
+  if (horafinReunion <= horaFinXor) {
+    if (minFinReunion <= minFinXor) {
+      // console.log("A hora de fin tampouco se sae do horario");
+      return true;
+    } else {
+      // console.log("Error min fin");
+      return false;
+    }
+  } else {
+    // console.log("Error hora fin");
+    return false;
+  }
+}
 
-arraySaida = buscaminas(arrayEntrada);
-console.log("empezamos a percorrer a resposta");
-console.log(arraySaida);
-// for (let i = 0; i < arraySaida.length; i++) {
-//   console.log("");
-//   for (let j = 0; j < arraySaida[i].length; j++) {
-//     console.log("numero");
-//     console.log(arraySaida[i][j]);
-//   }
-// }
+let resultado = axendarReunion("07:55", 40);
+
+if (resultado == true) {
+  console.log("Hora correcta");
+} else {
+  console.log("Hora incorrecta");
+}
+
+console.assert(
+  axendarReunion("7:00", 15) == false,
+  'Fallo comprobando axendarReunión("7:00", 15) == false'
+);
+console.assert(
+  axendarReunion("7:29", 30) == false,
+  'Fallo comprobando axendarReunión("7:30", 30) == false'
+);
+console.assert(
+  axendarReunion("11:30", 60) == true,
+  'Fallo comprobando axendarReunión("11:30", 60) == true'
+);
+
+console.assert(
+  axendarReunion("17:00", 45) == true,
+  'Fallo comprobando axendarReunión("17:00", 45) == true'
+);
+
+console.assert(
+  axendarReunion("17:30", 30) == false,
+  'Fallo comprobando axendarReunión("17:30", 30) == false'
+);
+
+let i = prompt("");

@@ -1,5 +1,0 @@
-Estes son os apuntes
-En casa
-1- Claves SSH
-2- Clonar o repositorio
-3- Todos os días habería que facer un git pull (fetch+merge)  antes de emepzar
