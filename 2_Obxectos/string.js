@@ -89,14 +89,14 @@ console.log(enmascarar("11111555555"));
 const flightsInfo =
   "_Delayed_Departure;scq93766109;bio2133758440;11:25+_Arrival;bio09433847 22;scq93766109;11:45+_Delayed_Arrival;svq7439299980;scq93766109;12:05+_Departure;scq93766109;svq2323639855;12:30";
 
-linea = flightsInfo.replaceAll("+", "\n");
+linea = flightsInfo.replaceAll("+", ")\n");
 espacios = linea.replaceAll("_", " ");
 console.log(espacios);
 array = espacios.split(";");
 
 for (let i = 1; i < array.length; i = i + 3) {
-  array[i] = " " + array[i].slice(0, 3) + " ";
-  array[i + 1] = " " + array[i + 1].substring(0, 3) + "";
+  array[i] = " " + array[i].slice(0, 3).toUpperCase() + "";
+  array[i + 1] = " " + (array[i + 1].substring(0, 3).toUpperCase() + " (");
 }
 
 console.log(array);

@@ -26,8 +26,11 @@ switch (day) {
     break;
 }
 
+// Solución proposta pola profe: facer un array cos nomes dos días é coller a posicion do oarray que devolvva a funcion get day
+
 // Exercicio 2 dates
 const data2 = new Date("July 25, 2022 ");
+// const data2 = new Date("2022, 6, 25");
 const day2 = data2.getDay();
 
 switch (day2) {
@@ -56,43 +59,40 @@ switch (day2) {
 
 // Exercicio 3
 
-// const data3 = new Date("October 13, 2022 ");
-// const value = data3.valueOf() - data.valueOf();
-// const segs = value / 1000;
-// const mins = segs / 60;
-// const hours = mins / 60;
-// const days = hours / 24;
+const data3 = new Date("October 13, 2022 ");
+const value = data3.valueOf() - data.valueOf();
+const segs = value / 1000;
+const mins = segs / 60;
+const hours = mins / 60;
+const days = hours / 24;
 
-// console.log("days: " + days);
+console.log("days: " + days);
 
 //  Exercicio 4
 
 function calculoDiasMes(mes, ano) {
   return new Date(ano, mes, 0).getDate();
-  // let secondsMonth = fecha.valueOf();
-  // fecha.setMonth(mes);
-  // let finalSeconds = fecha.valueOf() - secondsMonth;
-  // const segs = finalSeconds / 1000;
-  // const mins = segs / 60;
-  // const hours = mins / 60;
-  // const days = hours / 24;
-  // console.log(`The month has ${Math.round(days)}`);
 }
-console.log(calculoDiasMes(2, 2020));
+console.log(calculoDiasMes(12, 2020));
 
 // // Exercicio 5 - este esta mal
 
-// function eFinSemana(data) {
-//   console.log("dia " + data.getDay());
-//   if (data.getDay() == 0 || data.getDay() == 6) return "Finde";
-//   else return "non finde";
-// }
+function eFinSemana(data) {
+  console.log("dia " + data.getDay());
+  if (data.getDay() == 0 || data.getDay() == 6) {
+    return "Finde";
+  } else {
+    return "non finde";
+  }
+}
+
+console.log(eFinSemana(new Date(2022, 9, 15)));
 
 // console.log(eFinSemana(new Date(2022, 10, 14)));
 
 // // Exercicio 6
 function diasTranscurridos(data) {
-  fechaInicio = new Date(2022, 1, 1).valueOf();
+  fechaInicio = new Date(2022, 1, 1).valueOf(); // getTime() fai o mesmo
   fechaActual = data.valueOf();
   dif = fechaActual - fechaInicio;
 
