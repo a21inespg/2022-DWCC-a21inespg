@@ -35,22 +35,36 @@ console.log(diasSemana.every(isS));
 // Exercicio 4
 
 let parrafo = " hola que tal chamome ines poses gonzalez";
-function texto(parrafo) {
-  let cadDevolta = "";
-  for (let i = 0; i < parrafo.length - 1; i++) {
-    let letra = "";
+// function texto(parrafo) {
+//   let cadDevolta = "";
+//   for (let i = 0; i < parrafo.length - 1; i++) {
+//     let letra = "";
 
-    for (let j = 0; j < parrafo[i].length; j++) {
-      if (j == 0) {
-        letra = parrafo[i].charAt(0).toUpperCase();
-        cadDevolta += letra;
-      } else {
-        letra = parrafo[i].charAt(j).toLowerCase();
-        cadDevolta += letra;
-      }
-    }
-    cadDevolta += " ";
+//     for (let j = 0; j < parrafo[i].length; j++) {
+//       if (j == 0) {
+//         letra = parrafo[i].charAt(0).toUpperCase();
+//         cadDevolta += letra;
+//       } else {
+//         letra = parrafo[i].charAt(j).toLowerCase();
+//         cadDevolta += letra;
+//       }
+//     }
+//     cadDevolta += " ";
+//   }
+//   return cadDevolta;
+// }
+
+function texto1(parrafo) {
+  let cadDevolta = "";
+  let letter,
+    resto = "";
+  let arr = parrafo.split(" ");
+  for (let val of arr) {
+    letter = val.charAt(0).toUpperCase();
+    resto = val.slice(1).toLowerCase();
+    cadDevolta += letter + resto + " ";
   }
+
   return cadDevolta;
 }
-console.log(texto(parrafo.split(" ")));
+console.log(texto1(parrafo));

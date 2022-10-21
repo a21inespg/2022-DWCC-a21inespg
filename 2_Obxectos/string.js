@@ -1,4 +1,6 @@
 // Exercicio 1
+
+// podia ter usado split, reverse e join e facelo todo nunha linea
 function reverseString(stringEntrada) {
   let stringSaida = "";
 
@@ -12,18 +14,10 @@ console.log("O string hola ao reves é : " + reverseString("hola"));
 
 // Exercicio 2
 function removeCharacters(cad, arr) {
-  let cadSaida = "";
-
   for (let i = 0; i < arr.length; i++) {
-    let patron = arr[i];
-    console.log(patron);
-    if (i == 0) {
-      cadSaida = cad.replaceAll(patron, "");
-    }
-    cadSaida = cadSaida.replaceAll(patron, "");
+    cad = cad.replaceAll(arr[i], "");
   }
-
-  return cadSaida;
+  return cad;
 }
 
 console.log(
@@ -62,15 +56,13 @@ function caracterMaisRepetido(palabra) {
     }
   }
 
-  console.log(
-    `A letra máis repetida é "${letraFinal}" e as suas ocorrencias son ${contadorFinal}`
-  );
+  return `A letra máis repetida é "${letraFinal}" e as suas ocorrencias son ${contadorFinal}`;
 }
 
-caracterMaisRepetido("innnnesss");
+console.log(caracterMaisRepetido("innnnesss"));
 
 // Exercicio 4
-
+// Teria que facerse co pad start
 function enmascarar(cadNums) {
   if (isNaN(cadNums)) {
     console.log("Numero NON introducido");
@@ -85,13 +77,13 @@ function enmascarar(cadNums) {
 console.log(enmascarar("11111555555"));
 
 // Exercicio 5
-
+// Para alinear á dereita utilizar o pad start
 const flightsInfo =
   "_Delayed_Departure;scq93766109;bio2133758440;11:25+_Arrival;bio09433847 22;scq93766109;11:45+_Delayed_Arrival;svq7439299980;scq93766109;12:05+_Departure;scq93766109;svq2323639855;12:30";
 
-linea = flightsInfo.replaceAll("+", ")\n");
+linea = flightsInfo.replaceAll("+", ") \n");
 espacios = linea.replaceAll("_", " ");
-console.log(espacios);
+
 array = espacios.split(";");
 
 for (let i = 1; i < array.length; i = i + 3) {
@@ -99,9 +91,17 @@ for (let i = 1; i < array.length; i = i + 3) {
   array[i + 1] = " " + (array[i + 1].substring(0, 3).toUpperCase() + " (");
 }
 
-console.log(array);
 let stringFinal = "";
 for (let i = 0; i < array.length; i++) {
   stringFinal = stringFinal.concat(array[i]);
 }
-console.log(stringFinal);
+
+// Solución da profe:
+const getCode = (str) => str.slice(0, 3).toUpperCase();
+for (const flight of flightsInfo.split("+")) {
+  const [type, from, to, time] = flight.split(";");
+  const output = `${type.replaceAll("_", " ")} ${getCode(from)} ${getCode(
+    to
+  )}(${time.replace(":", "h")})`.padStart(36);
+  console.log(output);
+}
