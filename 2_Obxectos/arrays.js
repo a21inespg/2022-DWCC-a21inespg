@@ -74,3 +74,39 @@ const obj = ["a", "b", "c", "d"];
 for (const property in obj) {
   console.log(`${property}: ${obj[property]}`);
 }
+
+const players = [
+  [
+    "Neuer",
+    "Pavard",
+    "Martinez",
+    "Alaba",
+    "Davies",
+    "Kimmich",
+    "Goretzka",
+    "Coman",
+    "Muller",
+    "Gnarby",
+    "Lewandowski",
+  ],
+  [
+    "Burki",
+    "Schulz",
+    "Hummels",
+    "Akanji",
+    "Hakimi",
+    "Weigl",
+    "Witsel",
+    "Hazard",
+    "Brandt",
+    "Sancho",
+    "Gotze",
+  ],
+];
+
+let [players1, players2] = [players[0], players[1]];
+let [gk, fieldPlayers] = [players1.splice(0, 1), players1];
+let allplayers = [...players1, ...players2];
+console.log(allplayers);
+let players1Final = [...players1, "thiago", "coutinho"];
+console.log(players1Final);
