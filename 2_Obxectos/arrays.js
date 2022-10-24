@@ -68,3 +68,9 @@ function texto1(parrafo) {
   return cadDevolta;
 }
 console.log(texto1(parrafo));
+
+const obj = ["a", "b", "c", "d"];
+
+for (const property in obj) {
+  console.log(`${property}: ${obj[property]}`);
+}
