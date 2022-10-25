@@ -74,7 +74,17 @@ const obj = ["a", "b", "c", "d"];
 for (const property in obj) {
   console.log(`${property}: ${obj[property]}`);
 }
+// Exercicicios 2 arrays
+// Exercicios filter, find, findIndex...
+console.log(diasSemana.filter((dia) => dia[0] == "m"));
+console.log(diasSemana.find((dia) => dia[0] == "m"));
+console.log(diasSemana.findIndex((dia) => dia[0] == "m"));
+console.log(
+  diasSemana.map((dia) => dia[0].toUpperCase() + dia.substring(1, dia.length))
+);
 
+// Deconstrucion de arrays
+// Exercicio 1
 const players = [
   [
     "Neuer",
@@ -110,3 +120,6 @@ let allplayers = [...players1, ...players2];
 console.log(allplayers);
 let players1Final = [...players1, "thiago", "coutinho"];
 console.log(players1Final);
+
+// Exercicio 2
+let palabras = ["first_name", "last_NAME"];

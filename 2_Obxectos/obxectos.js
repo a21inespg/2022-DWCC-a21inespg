@@ -37,6 +37,17 @@ const game1 = {
 let contador = 1;
 game1.scored.forEach((player) => console.log(`Gol ${contador++}: ${player}`));
 
+let scorers = new Object();
+let cont = 0;
+for (const player of game1.scored) {
+  if (scorers[player] === undefined) {
+    scorers[player] = 1;
+  } else {
+    scorers[player] += 1;
+  }
+}
+console.log(scorers);
+
 // Exercicio 4
 const inventors = [
   { first: "Albert", last: "Einstein", year: 1879, passed: 1955 },
@@ -52,3 +63,83 @@ const inventors = [
   { first: "Lise", last: "Meitner", year: 1878, passed: 1968 },
   { first: "Hanna", last: "Hammarström", year: 1829, passed: 1909 },
 ];
+let inventorsXVI = [];
+for (const inventor of inventors) {
+  if (inventor.year >= 1500 && inventor.year <= 1600) {
+    inventorsXVI.push(inventor);
+  }
+}
+console.log(inventorsXVI);
+
+let inventorsCompleteName = [];
+inventors.forEach((inventor) =>
+  console.log(inventorsCompleteName.push(`${inventor.first} ${inventor.last}`))
+);
+
+function compareLast(a, b) {
+  let letterA, letterB;
+
+  for (let i = 0; i < a.length; i++) {
+    if (a[i] == " ") {
+      letterA = a[i + 1];
+    }
+  }
+  for (let j = 0; j < b.length; j++) {
+    if (b[j] == " ") {
+      letterB = b[j + 1];
+    }
+  }
+  if (letterA < letterB) {
+    return -1;
+  } else if (letterB > letterA) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
+console.log(inventorsCompleteName);
+inventorsCompleteName.sort(compareLast);
+console.log(inventorsCompleteName);
+
+inventors.sort((a, b) => (a.last < b.last ? -1 : 1));
+console.log(inventors);
+
+inventors.sort((a, b) => (a.year < b.year ? -1 : 1));
+console.log(inventors);
+let suma = 0;
+inventors.forEach((inventor) => (suma += inventor.passed - inventor.year));
+console.log(`A suma de anos que viviron é: ${suma}`);
+
+inventors.sort((a, b) => (a.passed - a.year > b.passed - b.year ? -1 : 1));
+console.log(inventors);
+
+// Exercicio 5
+const data = [
+  "car",
+  "car",
+  "truck",
+  "truck",
+  "bike",
+  "walk",
+  "car",
+  "van",
+  "bike",
+  "walk",
+  "car",
+  "van",
+  "car",
+  "truck",
+  "pogostick",
+];
+
+let mediosTransporte = new Object();
+
+for (const dato of data) {
+  if (mediosTransporte[dato] === undefined) {
+    mediosTransporte[dato] = 1;
+  } else {
+    mediosTransporte[dato]++;
+  }
+}
+console.log(mediosTransporte);
