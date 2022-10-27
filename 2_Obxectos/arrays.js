@@ -83,6 +83,16 @@ console.log(
   diasSemana.map((dia) => dia[0].toUpperCase() + dia.substring(1, dia.length))
 );
 
+
+// Este non o entendo moi ben
+let numeros = [4, 562, 933, -5, 88];
+console.log(
+  "O vvalor máis alto é: " +
+    numeros.reduce((previousValue, currentValue) =>
+      previousValue > currentValue ? previousValue : currentValue
+    )
+);
+
 // Deconstrucion de arrays
 // Exercicio 1
 const players = [
@@ -122,4 +132,16 @@ let players1Final = [...players1, "thiago", "coutinho"];
 console.log(players1Final);
 
 // Exercicio 2
-let palabras = ["first_name", "last_NAME"];
+let palabras = ["fIRst_name", "last_NAME"];
+let palabraCC = "";
+for (const palabra of palabras) {
+  for (let i = 0; i < palabra.length; i++) {
+    if (palabra[i] == "_") {
+      let primera = palabra.substring(0, i).toLowerCase();
+      let letraMayus = palabra[i + 1].toUpperCase();
+      let segunda = palabra.substring(i + 2, palabra.length).toLowerCase();
+      palabraCC = primera + letraMayus + segunda;
+    }
+  }
+  console.log(`A palabra ${palabra} en Camel Case é ${palabraCC}`);
+}
