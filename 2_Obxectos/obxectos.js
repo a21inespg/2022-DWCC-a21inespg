@@ -5,7 +5,7 @@ const television = {
   categoria: "televisores",
   unidades: 4,
   prezo: 354.99,
-  importe: function () {
+  importe() {
     return this.prezo * this.unidades;
   },
 };
@@ -22,24 +22,25 @@ const game = {
   },
 };
 
-let team1, draw, team2;
-team1 = game.odds.team1;
-draw = game.odds.x;
-team2 = game.odds.team2;
+// team1 = game.odds.team1;
+let { team1, x: draw, team2 } = game.odds;
 
 console.log(team1);
 console.log(team2);
+console.log(draw);
 
 // Exercicio 3
+// ela fixoo cun for of con game.scored entries que devolve indice e xogador
 const game1 = {
   scored: ["Lewandowski", "Gnarby", "Lewandowski", "Hummels"],
 };
-let contador = 1;
-game1.scored.forEach((player) => console.log(`Gol ${contador++}: ${player}`));
+let contador = 0;
+game1.scored.forEach((player) => console.log(`Gol ${++contador}: ${player}`));
 
-let scorers = new Object();
+let scorers = {}; // asi escribese un obxecto vacío
 let cont = 0;
 for (const player of game1.scored) {
+  //scorers[xogador] ? scorers[xogador]++ : (scorers[xogador]=1) é o mesmo pero máis simple
   if (scorers[player] === undefined) {
     scorers[player] = 1;
   } else {
@@ -63,50 +64,42 @@ const inventors = [
   { first: "Lise", last: "Meitner", year: 1878, passed: 1968 },
   { first: "Hanna", last: "Hammarström", year: 1829, passed: 1909 },
 ];
-let inventorsXVI = [];
-for (const inventor of inventors) {
-  if (inventor.year >= 1500 && inventor.year <= 1600) {
-    inventorsXVI.push(inventor);
-  }
-}
+
+// a)
+const inventorsXVI = inventors.filter(
+  (inventor) => inventor.year > 1500 && inventor.year <= 1600
+);
+// for (const inventor of inventors) {
+//   if (inventor.year >= 1500 && inventor.year <= 1600) {
+//     inventorsXVI.push(inventor);
+//   }
+// }
+console.log("Inventores séculoXVI: ");
 console.log(inventorsXVI);
 
-let inventorsCompleteName = [];
-inventors.forEach((inventor) =>
-  console.log(inventorsCompleteName.push(`${inventor.first} ${inventor.last}`))
+//b)
+let inventorsCompleteName = inventors.map(
+  (inventor) => `${inventor.first} ${inventor.last}`
 );
-
-function compareLast(a, b) {
-  let letterA, letterB;
-
-  for (let i = 0; i < a.length; i++) {
-    if (a[i] == " ") {
-      letterA = a[i + 1];
-    }
-  }
-  for (let j = 0; j < b.length; j++) {
-    if (b[j] == " ") {
-      letterB = b[j + 1];
-    }
-  }
-  if (letterA < letterB) {
-    return -1;
-  } else if (letterB > letterA) {
-    return 1;
-  } else {
-    return 0;
-  }
-}
-
-console.log(inventorsCompleteName);
-inventorsCompleteName.sort(compareLast);
+// inventors.forEach((inventor) =>
+//   inventorsCompleteName.push(`${inventor.first} ${inventor.last}`)
+// );
+console.log("Nomes completos: ");
 console.log(inventorsCompleteName);
 
+inventorsCompleteName.sort((a, b) =>
+  a[a.indexOf(" ") + 1] < b[b.indexOf(" ") + 1] ? -1 : 1
+);
+console.log("Ordenado polo apelido 1: ");
+console.log(inventorsCompleteName);
+console.log("Ordeno por apelido 2: ");
 inventors.sort((a, b) => (a.last < b.last ? -1 : 1));
 console.log(inventors);
 
 inventors.sort((a, b) => (a.year < b.year ? -1 : 1));
 console.log(inventors);
+
+// Suma anos vividos
 let suma = 0;
 inventors.forEach((inventor) => (suma += inventor.passed - inventor.year));
 console.log(`A suma de anos que viviron é: ${suma}`);
@@ -136,10 +129,8 @@ const data = [
 let mediosTransporte = new Object();
 
 for (const dato of data) {
-  if (mediosTransporte[dato] === undefined) {
-    mediosTransporte[dato] = 1;
-  } else {
-    mediosTransporte[dato]++;
-  }
+  mediosTransporte[dato]
+    ? mediosTransporte[dato]++
+    : (mediosTransporte[dato] = 1);
 }
 console.log(mediosTransporte);

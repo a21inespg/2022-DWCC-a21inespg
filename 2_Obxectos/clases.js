@@ -27,3 +27,24 @@ console.log(" Importe: " + produto2.importe() + "euros");
 let produto3 = new Produto("Mango", "Chaqueta", 2, 25);
 console.log(produto3.getInfo());
 console.log(" Importe: " + produto3.importe() + "euros");
+
+// Exercicio 2
+class Televisor extends Produto {
+  constructor(marca, categoria, unidades, prezo, tamaño) {
+    super(marca, categoria, unidades, prezo);
+    this.values = [tamaño];
+  }
+
+  getInfo() {
+    return `${super.getInfo()}. O tamaño é ${this.values[0]} pulgadas. `;
+  }
+}
+
+let tv = new Televisor("Samsung", "Televisor", 5, 5, 50);
+console.log(tv.getInfo());
+
+// Exercicio 3
+let produto4 = new Produto("Parfois", "Bolso", 7, 7);
+let produto5 = new Produto("Bershka", "Abrigo", 8, 5);
+
+let arrProdutos = [produto1, produto2, produto3, produto4, produto5];

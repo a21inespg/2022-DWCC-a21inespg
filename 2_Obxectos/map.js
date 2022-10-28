@@ -14,11 +14,7 @@ const gameEvents = new Map([
   [92, "Yellow card"],
 ]);
 
-let eventosSET = new Set();
-
-for (const evento of gameEvents.values()) {
-  eventosSET.add(evento);
-}
+let eventosSET = new Set(gameEvents.values());
 
 let eventos = [...eventosSET];
 console.log(eventos);
@@ -26,9 +22,7 @@ console.log(eventos);
 // Exercicio 1 b)
 
 for (const [minuto, evento] of gameEvents) {
-  if (minuto <= 45) {
-    console.log(`[Primeira parte] ${minuto}:${evento}`);
-  } else {
-    console.log(`[Segunda parte] ${minuto}:${evento}`);
-  }
+  minuto <= 45
+    ? console.log(`[Primeira parte] ${minuto}:${evento}`)
+    : console.log(`[Segunda parte] ${minuto}:${evento}`);
 }
