@@ -2,16 +2,19 @@
 // Exercicio 1
 class Produto {
   constructor(marca, categoria, unidades, prezo) {
-    this.values = [marca, categoria, unidades, prezo];
+    this.marca = marca;
+    this.categoria = categoria;
+    this.unidades = unidades;
+    this.prezo = prezo;
   }
 
   importe() {
-    return this.values[3] * this.values[2];
+    return this.unidades * this.prezo;
   }
 
   getInfo() {
-    return `${this.values[1]} ${this.values[0]}: ${this.values[2]}x${
-      this.values[3]
+    return `${this.categoria} ${this.marca}: ${this.unidades}x${
+      this.prezo
     }=${this.importe()}`;
   }
 }
@@ -32,11 +35,11 @@ console.log(" Importe: " + produto3.importe() + "euros");
 class Televisor extends Produto {
   constructor(marca, categoria, unidades, prezo, tamaño) {
     super(marca, categoria, unidades, prezo);
-    this.values = [tamaño];
+    this.tamaño = tamaño;
   }
 
   getInfo() {
-    return `${super.getInfo()}. O tamaño é ${this.values[0]} pulgadas. `;
+    return `${super.getInfo()}. O tamaño é ${this.tamaño} pulgadas. `;
   }
 }
 
@@ -48,3 +51,46 @@ let produto4 = new Produto("Parfois", "Bolso", 7, 7);
 let produto5 = new Produto("Bershka", "Abrigo", 8, 5);
 
 let arrProdutos = [produto1, produto2, produto3, produto4, produto5];
+
+function prodsSortByCategory(arrProdutos) {
+  arrProdutos.sort((a, b) => (a.categoria > b.categoria ? 1 : -1));
+}
+
+prodsSortByCategory(arrProdutos);
+
+console.log("O array ordenado por categoría: ");
+console.log(arrProdutos);
+
+function prodsSortByPrice(arrProdutos) {
+  arrProdutos.sort((a, b) => (a.prezo > b.prezo ? 1 : -1));
+}
+
+prodsSortByPrice(arrProdutos);
+console.log("O array ordenado por prezo: ");
+console.log(arrProdutos);
+
+function prodsTotalPrice(arrProdutos) {
+  return arrProdutos.reduce((total, produto) => {
+    total + produto.importe();
+  }, 0);
+}
+
+console.log("O precio total é: "); // non me vai
+console.log(prodsTotalPrice(arrProdutos));
+
+function prodsWithLowUnits(produtos, uds) {
+  return produtos.filter((produto) => produto.unidades < uds);
+}
+
+console.log(prodsWithLowUnits(arrProdutos, 7));
+
+function prodsList(produtos) {
+  let stringRetorno = "Lista produtos: ";
+  produtos.forEach((produto) => {
+    stringRetorno += "\n- " + produto.getInfo();
+  });
+
+  return stringRetorno;
+}
+
+console.log(prodsList(arrProdutos));

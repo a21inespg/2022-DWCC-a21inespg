@@ -69,11 +69,7 @@ const inventors = [
 const inventorsXVI = inventors.filter(
   (inventor) => inventor.year > 1500 && inventor.year <= 1600
 );
-// for (const inventor of inventors) {
-//   if (inventor.year >= 1500 && inventor.year <= 1600) {
-//     inventorsXVI.push(inventor);
-//   }
-// }
+
 console.log("Inventores séculoXVI: ");
 console.log(inventorsXVI);
 
@@ -81,29 +77,48 @@ console.log(inventorsXVI);
 let inventorsCompleteName = inventors.map(
   (inventor) => `${inventor.first} ${inventor.last}`
 );
-// inventors.forEach((inventor) =>
-//   inventorsCompleteName.push(`${inventor.first} ${inventor.last}`)
-// );
+
 console.log("Nomes completos: ");
 console.log(inventorsCompleteName);
 
+// c)
 inventorsCompleteName.sort((a, b) =>
   a[a.indexOf(" ") + 1] < b[b.indexOf(" ") + 1] ? -1 : 1
 );
 console.log("Ordenado polo apelido 1: ");
 console.log(inventorsCompleteName);
-console.log("Ordeno por apelido 2: ");
+
+// Mellor seria ter utilizado un split
+inventorsCompleteName.sort((a, b) =>
+  a.substring(a.indexOf(" ") + 1) < b.substring(b.indexOf(" ") + 1) ? -1 : 1
+);
+
+console.log("Ordenado polo apelido 1: ");
+console.log(inventorsCompleteName);
+
+// d)
 inventors.sort((a, b) => (a.last < b.last ? -1 : 1));
+console.log("Ordeno por apelido 2: ");
+
 console.log(inventors);
+
+// e)
 
 inventors.sort((a, b) => (a.year < b.year ? -1 : 1));
 console.log(inventors);
 
+// f)
 // Suma anos vividos
 let suma = 0;
 inventors.forEach((inventor) => (suma += inventor.passed - inventor.year));
 console.log(`A suma de anos que viviron é: ${suma}`);
 
+const totalYears = inventors.reduce((total, inventor) => {
+  return total + (inventor.passed - inventor.year);
+}, 0);
+console.log(`A suma dos anos é ${totalYears}`);
+
+// g)
 inventors.sort((a, b) => (a.passed - a.year > b.passed - b.year ? -1 : 1));
 console.log(inventors);
 

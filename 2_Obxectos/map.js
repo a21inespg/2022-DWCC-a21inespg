@@ -23,6 +23,6 @@ console.log(eventos);
 
 for (const [minuto, evento] of gameEvents) {
   minuto <= 45
-    ? console.log(`[Primeira parte] ${minuto}:${evento}`)
-    : console.log(`[Segunda parte] ${minuto}:${evento}`);
+    ? console.log(`[Primeira parte] ${minuto}:${evento}.`)
+    : console.log(`[Segunda parte] ${minuto}:${evento}.`);
 }
