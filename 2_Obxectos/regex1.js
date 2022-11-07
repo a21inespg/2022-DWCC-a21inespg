@@ -1,35 +1,36 @@
 "use strict";
 
-verify(/ca(t|r)/, ["my car", "bad cats"], ["camper", "high art"]);
+verify(/ca[tr]/, ["my car", "bad cats"], ["camper", "high art"]);
 verify(/pr?op/, ["pop culture", "mad props"], ["plop", "prrrop"]);
 verify(
-  /^ferr(et|y|ari)$/,
+  /ferr(et|y|ari)/,
   ["ferret", "ferry", "ferrari"],
   ["ferrum", "transfer A"]
 );
 verify(
-  /\Bious$/,
+  /\b\w*ious\b/,
+  // /.*ious\b/,
   ["how delicious", "spacious room"],
   ["ruinous", "consciousness"]
 );
 
 // e. Un espazo seguido de punto, como, dous puntos ou punto e coma.
-verify(/\b(.|;|:)/, ["bad punctuation ."], ["escape the period"]);
+verify(/\s[.,;:]/, ["bad punctuation ."], ["escape the period"]);
 
 // f. Unha palabra con máis de 6 letras.
-// g. Unha palabra sen a letra e (ou E).
-// verify(/.../, ["how delicious", "spacious room"], ["ruinous", "consciousness"]);
+verify(
+  /[a-z]{6,}/i,
+  ["Siebentausenddreihundertzweiundzwanzig"],
+  ["no", "three small words"]
+);
 
-// verify(
-//   /.../,
-//   ["Siebentausenddreihundertzweiundzwanzig"],
-//   ["no", "three small words"]
-// );
-// verify(
-//   /.../,
-//   ["red platypus", "wobbling nest"],
-//   ["earth bed", "learning ape", "BEET"]
-// );
+// g. Unha palabra sen a letra e (ou E).
+verify(
+  /\b[a-df-z]+\b/i,
+  // /\b([^e ]+)\b/i,
+  [("red platypus", "wobbling nest")],
+  ["earth bed", "learning ape", "BEET"]
+);
 
 function verify(regexp, yes, no) {
   // Ignore unfinished exercises
