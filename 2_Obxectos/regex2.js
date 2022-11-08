@@ -54,19 +54,28 @@ function eliminarEtiquetas(texto) {
 console.log(eliminarEtiquetas("<h1>sdjfhsdkjfhsdkfs <p>dsjdsjdn</p></h1>"));
 
 // Exercicio 7
-function asteriscosInsultos(insulto) {
-  console.log("inesultp recibido");
-  console.log(insulto);
-
-  return insulto.replaceAll(/.*/g, "*");
-  //   return insulto.substring(1, insulto.length);
+function asteriscosInsultos(texto) {
+  let insultos = [
+    "testán",
+    "langrán",
+    "fervellasverzas",
+    "baldreu",
+    "lacazán",
+    "pillabán",
+  ];
+  let palabras = texto.split(" ");
+  for (let i = 0; i < palabras.length; i++) {
+    for (let insulto of insultos) {
+      if (palabras[i] == insulto) {
+        palabras[i] =
+          insulto.substring(0, 1) +
+          insulto.substring(1, insulto.length).replace(/./g, "*");
+      }
+    }
+  }
+  return palabras.join(" ");
 }
-let insultos = [
-  "testán",
-  "langrán",
-  "fervellasverzas",
-  "baldreu",
-  "lacazán",
-  "pillabán",
-];
-console.log(asteriscosInsultos("están"));
+
+console.log(
+  asteriscosInsultos("hola que tal pedazo de langrán y fervellasverzas")
+);
