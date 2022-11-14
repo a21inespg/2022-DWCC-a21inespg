@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table,
+      tr,
+      td {
+        border-collapse: collapse;
+        border: 1px black solid;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td>1:1</td>
+        <td>2:1</td>
+        <td>3:1</td>
+        <td>4:1</td>
+        <td>5:1</td>
+      </tr>
+      <tr>
+        <td>1:1</td>
+        <td>2:2</td>
+        <td>3:1</td>
+        <td>4:1</td>
+        <td>5:1</td>
+      </tr>
+      <tr>
+        <td>1:1</td>
+        <td>2:1</td>
+        <td>3:3</td>
+        <td>4:1</td>
+        <td>5:1</td>
+      </tr>
+      <tr>
+        <td>1:1</td>
+        <td>2:1</td>
+        <td>3:1</td>
+        <td>4:4</td>
+        <td>5:1</td>
+      </tr>
+      <tr>
+        <td>1:1</td>
+        <td>2:1</td>
+        <td>3:1</td>
+        <td>4:1</td>
+        <td>5:5</td>
+      </tr>
+    </table>
+  </body>
+</html>
+
+<script>
+  console.log(document.body.firstElementChild.rows);
+  let filas = document.body.firstElementChild.rows;
+  let contador = 0;
+  for (let fila of filas) {
+    console.log(fila);
+    console.log((fila.cells[contador].style.backgroundColor = "red"));
+    contador++;
+  }
+</script>
