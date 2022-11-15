@@ -15,7 +15,7 @@
     </style>
   </head>
   <body>
-    <table>
+    <table id="taboaCores">
       <tr>
         <td>1:1</td>
         <td>2:1</td>
@@ -56,12 +56,13 @@
 </html>
 
 <script>
-  console.log(document.body.firstElementChild.rows);
+  // let taboa = document.body.children["taboaCores"];
+  // console.log(taboa);
+  // console.log(document.body.firstElementChild.rows);
   let filas = document.body.firstElementChild.rows;
   let contador = 0;
   for (let fila of filas) {
-    console.log(fila);
-    console.log((fila.cells[contador].style.backgroundColor = "red"));
+    fila.cells[contador].style.backgroundColor = "red";
     contador++;
   }
 </script>
