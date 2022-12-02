@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      form:valid input {
+        background-color: lightseagreen;
+      }
+
+      form:invalid input {
+        background-color: lightcoral;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>3 validacions</h1>
+    <h2>Validacion html</h2>
+
+    <form action="" id="html">
+      <label for="">Número: </label>
+      <input type="text" pattern="^\d{3}(-\d{2}-|\d{2})\d{3}$" />
+    </form>
+
+    <h2>Validacion javascript</h2>
+
+    <form action="" id="js">
+      <label for="">Número: </label>
+      <input type="text" />
+    </form>
+
+    <h2>Validacion api</h2>
+
+    <form action="" id="api">
+      <label for="">Número: </label>
+      <input type="text" pattern="^\d{3}(-\d{2}-|\d{2})\d{3}$" />
+    </form>
+
+    <script src="ex2.js" defer></script>
+  </body>
+</html>
