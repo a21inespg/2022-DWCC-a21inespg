@@ -19,18 +19,22 @@
         width: 120px;
         height: 120px;
       }
+
+      p {
+        background-color: pink;
+      }
     </style>
   </head>
   <body>
     <table>
       <tr>
-        <td></td>
-        <td></td>
+        <td><p></p></td>
+        <td><p></p></td>      
       </tr>
 
       <tr>
-        <td></td>
-        <td></td>
+        <td><p></p></td>
+        <td><p></p></td>
       </tr>
     </table>
   </body>
@@ -38,10 +42,36 @@
   <script>
     let body = document.body;
     body.addEventListener("click", (event) => {
+      
       if (event.target.tagName == "TD") {
-        let ta = document.createElement("textarea");
-        event.target.append(ta);
+        console.log("td");
+      
+      let td=event.target;
+      let ta = document.createElement("textarea");
+      event.target.append(ta);
+       let p=td.querySelector("p");
+        body.addEventListener("keyup", (event)=>{
+         
+          if (event.code=="Enter") {
+            p.innerHTML=ta.value;
+            ta.style.display="none";
+          }
+                });
+      
+      
+        
       }
+
+      
     });
+   
+    body.addEventListener("blur", (event) => {
+      console.log("entro");
+      if (event.target.tagName == "TD") {
+          console.log("perdin foco");
+        console.log(event.target.children);
+      }
+    })
+  
   </script>
 </html>
