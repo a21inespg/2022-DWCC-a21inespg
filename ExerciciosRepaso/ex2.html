@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ex 2</title>
+    <style>
+      div {
+        width: 100px;
+        height: 100px;
+        background-color: lightcoral;
+      }
+
+      textarea {
+        width: 100px;
+        height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div><p></p></div>
+    <textarea name="" id=""></textarea>
+  </body>
+
+  <script>
+    let div = document.body.querySelector("div");
+    let area = document.body.querySelector("textarea");
+    area.style.display = "none";
+    div.addEventListener("click", (event) => {
+      div.style.display = "none";
+      area.style.display = "block";
+    });
+
+    area.addEventListener("blur", () => {
+      let contido = area.value;
+      div.style.display = "block";
+      area.style.display = "none";
+      div.querySelector("p").innerHTML = contido;
+    });
+
+    document.body.addEventListener("keypress", (event) => {
+      if (event.code == "Enter") {
+        let contido = area.value;
+        div.style.display = "block";
+        area.style.display = "none";
+        div.querySelector("p").innerHTML = contido;
+      }
+    });
+  </script>
+</html>

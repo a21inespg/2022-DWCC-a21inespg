@@ -14,16 +14,30 @@
     </style>
   </head>
   <body>
-    <div></div>
-    <br />
     <form action="">
       <label for="widht">Width: </label>
-      <input type="number" name="width" /> <br />
+      <input max="1000" min="0" type="number" name="width" /> <br />
       <br />
       <label for="height">Height: </label>
       <input type="number" name="height" />
     </form>
+    <br />
+    <div></div>
+    <br />
   </body>
 
-  <script></script>
+  <script>
+    let body = document.body.querySelector("form");
+    let div = document.body.querySelector("div");
+    body.addEventListener("input", (event) => {
+      let lado = event.target.getAttribute("name");
+      let inp = event.target.value;
+
+      if (lado == "width") {
+        div.style.width = inp + "px";
+      } else {
+        div.style.height = inp + "px";
+      }
+    });
+  </script>
 </html>
