@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            width:300px;
+        }
+
+        .casilla {
+            width:100px;
+            height:100px;
+            border:1px solid black;
+        }
+    </style>
+</head>
+<body>
+
+    <p>
+
+    </p>
+<div id="container">
+    <div class="casilla"></div>
+    <div class="casilla"></div>
+    <div class="casilla"></div>
+    <div class="casilla"></div>
+    <div class="casilla"></div>
+    <div class="casilla"></div>
+    <div class="casilla"></div>
+    <div class="casilla"></div>
+    <div class="casilla"></div>
+</div>
+<br>
+<button id="boton">Reiniciar xogo</button>
+</body>
+<script>
+    let turno=Math.floor(Math.random()*2);
+    console.log(turno);
+    if (turno==0) {
+        document.body.querySelector("p").innerHTML="X";
+    } else {
+        document.body.querySelector("p").innerHTML="O";
+
+    }
+
+    document.getElementById("container").addEventListener("click", (event)=> {
+        let contador=1;
+        if (event.target.innerHTML=="") {
+            contador++;
+            let turno=document.body.querySelector("p").innerHTML;
+            event.target.innerHTML=turno;
+
+            if (turno=="X") {
+                document.body.querySelector("p").innerHTML="O";
+            } else {
+                document.body.querySelector("p").innerHTML="X";
+
+            }
+
+            if (event.target.nextElementSibling.innerHTML==event.target.innerHTML && event.target.nextElementSibling.innerHTML==event.target.innerHTML)  {
+                document.body.querySelector("p").innerHTML="Gañou: "+event.target.innerHTML;
+
+            }
+
+            if (contador==9) {
+                document.body.querySelector("p").innerHTML="Rematou a partida";
+            }
+        }
+
+
+
+
+    });
+
+    document.getElementById("boton").addEventListener("click", ()=>{
+        let divs=document.body.getElementsByClassName("casilla");
+        for (div of divs) {
+            div.innerHTML="";
+
+        }
+        let turno=Math.floor(Math.random()*2);
+    console.log(turno);
+    if (turno==0) {
+        document.body.querySelector("p").innerHTML="X";
+    } else {
+        document.body.querySelector("p").innerHTML="O";
+
+    }
+    })
+</script>
+</html>
