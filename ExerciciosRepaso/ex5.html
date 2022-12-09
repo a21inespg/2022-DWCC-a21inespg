@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #container {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        width: 300px;
+      }
+
+      .casilla {
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <p></p>
+    <div id="container">
+      <div class="casilla diag1"></div>
+      <div class="casilla medio"></div>
+      <div class="casilla diag2"></div>
+      <div class="casilla"></div>
+      <div class="casilla medio" id="centro"></div>
+      <div class="casilla"></div>
+      <div class="casilla diag2"></div>
+      <div class="casilla medio"></div>
+      <div class="casilla diag1"></div>
+    </div>
+    <br />
+    <button id="boton">Reiniciar xogo</button>
+  </body>
+  <script>
+    let ganador = false;
+    let turno = Math.floor(Math.random() * 2);
+    if (turno == 0) {
+      document.body.querySelector("p").innerHTML = "X";
+    } else {
+      document.body.querySelector("p").innerHTML = "O";
+    }
+    let contador = 0;
+
+    document.getElementById("container").addEventListener("click", (event) => {
+      if (event.target.innerHTML == "" && contador < 9 && ganador == false) {
+        contador++;
+        let turno = document.body.querySelector("p").innerHTML;
+        event.target.innerHTML = turno;
+
+        if (turno == "X") {
+          document.body.querySelector("p").innerHTML = "O";
+        } else if (turno == "O") {
+          document.body.querySelector("p").innerHTML = "X";
+        }
+
+        let centros = document.body.getElementsByClassName("medio");
+
+        for (centro of centros) {
+          if (
+            centro.innerHTML != "" &&
+            centro.nextElementSibling.innerHTML == centro.innerHTML &&
+            centro.previousElementSibling.innerHTML == centro.innerHTML
+          ) {
+            ganador = true;
+          }
+        }
+
+        let diag1 = document.body.getElementsByClassName("diag1");
+        let diag2 = document.body.getElementsByClassName("diag2");
+
+        let medio = document.getElementById("centro");
+
+        if (ganador == true) {
+          document.body.querySelector("p").innerHTML =
+            "Gañou: " + event.target.innerHTML;
+        }
+
+        if (contador == 9) {
+          document.body.querySelector("p").innerHTML = "Rematou a partida";
+          if (ganador == false) {
+            document.body.querySelector("p").innerHTML =
+              "Rematou a partida. Houbo empate";
+          }
+        }
+      }
+    });
+
+    document.getElementById("boton").addEventListener("click", () => {
+      contador = 1;
+      ganador = false;
+      let divs = document.body.getElementsByClassName("casilla");
+      for (div of divs) {
+        div.innerHTML = "";
+      }
+      let turno = Math.floor(Math.random() * 2);
+
+      if (turno == 0) {
+        document.body.querySelector("p").innerHTML = "X";
+      } else {
+        document.body.querySelector("p").innerHTML = "O";
+      }
+    });
+  </script>
+</html>
+
+<!-- for (d of diag1) {
+          if (d.innerHTML != "") {
+            if (d.innerHTML == medio.innerHTML) {
+              ganador = true;
+            } else {
+              ganador = false;
+              break;
+            }
+          }
+        }
+
+        for (d of diag2) {
+          if (d.innerHTML != "") {
+            if (d.innerHTML == medio.innerHTML) {
+              ganador = true;
+            } else {
+              ganador = false;
+              break;
+            }
+          }
+        } -->

@@ -16,8 +16,8 @@
       }
       textarea {
         background-color: lightskyblue;
-        width: 120px;
-        height: 120px;
+        width: 30px;
+        height: 100px;
       }
 
       p {
@@ -29,7 +29,7 @@
     <table>
       <tr>
         <td><p></p></td>
-        <td><p></p></td>      
+        <td><p></p></td>
       </tr>
 
       <tr>
@@ -40,38 +40,33 @@
   </body>
 
   <script>
-    let body = document.body;
-    body.addEventListener("click", (event) => {
-      
-      if (event.target.tagName == "TD") {
-        console.log("td");
-      
-      let td=event.target;
-      let ta = document.createElement("textarea");
-      event.target.append(ta);
-       let p=td.querySelector("p");
-        body.addEventListener("keyup", (event)=>{
-         
-          if (event.code=="Enter") {
-            p.innerHTML=ta.value;
-            ta.style.display="none";
-          }
-                });
-      
-      
-        
-      }
+    // function handler(event) {
+    //   if (event.target.tagName == "TD") {
+    //     let lonx = event.target.children.length;
+    //     if (lonx <= 1) {
+    //       let td = event.target;
+    //       let ta = document.createElement("textarea");
+    //       event.target.append(ta);
+    //       let p = td.querySelector("p");
+    //       p.style.display = "none";
 
-      
-    });
-   
-    body.addEventListener("blur", (event) => {
-      console.log("entro");
-      if (event.target.tagName == "TD") {
-          console.log("perdin foco");
-        console.log(event.target.children);
-      }
-    })
-  
+    //       ta.addEventListener("blur", (event) => {
+    //         p.style.display = "block";
+    //         ta.style.display = "none";
+    //       });
+    //       body.addEventListener("keypress", (event) => {
+    //         if (event.code == "Enter") {
+    //           p.innerHTML = ta.value;
+    //           ta.style.display = "none";
+    //           p.style.display = "block";
+    //         }
+    //       });
+    //     }
+    //   }
+    // }
+    // let body = document.body;
+    // body.addEventListener("click", handler);
+
+    
   </script>
 </html>
