@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      const request = new XMLHttpRequest();
+      request.open(
+        "GET",
+        "https://raw.githubusercontent.com/mdn/learning-area/main/javascript/oojs/tasks/json/sample.json"
+      );
+      request.send();
+
+      request.addEventListener("load", function () {
+        let resposta = request.responseText;
+        console.log(resposta);
+        const gatos = JSON.parse(resposta);
+
+        let machos = 0;
+        let femias = 0;
+        for (let gato of gatos) {
+          console.log(gato.name);
+
+          if (gato.kittens.gender == "f") {
+            femias++;
+            console.log("femia");
+          } else {
+            machos++;
+          }
+        }
+
+        console.log("Hai " + femias + " femias e " + machos + " machos.");
+      });
+    </script>
+  </body>
+</html>
