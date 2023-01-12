@@ -18,23 +18,37 @@
 
       request.addEventListener("load", function () {
         let resposta = request.responseText;
-        console.log(resposta);
         const gatos = JSON.parse(resposta);
 
         let machos = 0;
         let femias = 0;
+
+        let nomes = "Os nomes das gatas son";
+
+        let contador = 0;
         for (let gato of gatos) {
-          console.log(gato.name);
-
-          if (gato.kittens.gender == "f") {
-            femias++;
-            console.log("femia");
-          } else {
-            machos++;
+          contador++;
+          for (let kitten of gato.kittens) {
+            kitten.gender == "f" ? femias++ : machos++;
           }
-        }
 
-        console.log("Hai " + femias + " femias e " + machos + " machos.");
+          contador == 1
+            ? (nomes = nomes + " e " + gato.name)
+            : (contador == contador) == gatos.length
+            ? (nomes = nomes + " " + gato.name)
+            : (nomes = nomes + ", " + gato.name);
+        }
+        console.log(nomes);
+
+        console.log(
+          "En total hai " +
+            (femias + machos) +
+            " gatiños. Hai " +
+            femias +
+            " femias e " +
+            machos +
+            " machos."
+        );
       });
     </script>
   </body>
