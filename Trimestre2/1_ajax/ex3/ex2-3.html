@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function numeros(num) {
+        return new Promise(function (resolve, reject) {
+          if (!Number.isInteger(num)) {
+            setTimeout(function () {
+              reject(new Error("ERRO: O parámetro enviado non é un número."));
+            }, 1000);
+          } else if (num % 2 == 0) {
+            setTimeout(function () {
+              reject(new Error("ERRO: O parámetro enviado é par."));
+            }, 2000);
+          } else {
+            resolve("O parámetro enviado é impar.");
+          }
+        });
+      }
+
+      let promesa = numeros(7);
+      promesa.then(
+        function (message) {
+          console.log(message);
+        },
+        function (error) {
+          console.log(error);
+        }
+      );
+
+      /*
+        O resultado do seguinte código é 1
+
+      */
+    </script>
+  </body>
+</html>

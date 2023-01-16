@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- EXERCICIO 1 -->
+    <!--  Non son iguais. Cando se produce un erro en f1 no primeiro fragento será capturado. Cando se produce no segundo fragmento non será capturado.  -->
+
+    <!-- EXERCICIO 2 -->
+    <!-- Primeiro "Error 1 porque se rexeita. Despois success 4, porque reject si ou si devolve unha promesa que é "undefined"." -->
+
+    <!-- EXERCICIO 3 -->
+    <!-- Primeiro success porque state==true. Despois, error porque se lle pasa a state o valor false. Logo error caught porque saltou un error e capturase. Finalmente non continúa porque o que se devolve é unha promesa que é verdadeira na que a data é "error caught". -->
+  </body>
+
+  <script>
+    function job() {
+      return new Promise(function (resolve, reject) {
+        reject();
+      });
+    }
+
+    // let promise = job();
+    // promise
+    //   .then(() => console.log("Success 1"))
+    //   .then(() => console.log("Success 2"))
+    //   .then(() => console.log("Success 3"))
+    //   .catch(() => console.log("Error 1"))
+    //   .then(() => console.log("Success 4"));
+
+    function job(state) {
+      return new Promise(function (resolve, reject) {
+        if (state) {
+          resolve("success");
+        } else {
+          reject("error");
+        }
+      });
+    }
+    let promise = job(true);
+    promise
+      .then(function (data) {
+        console.log(data);
+        return job(false);
+      })
+      .catch(function (error) {
+        console.log(error);
+        return "Error caught";
+      })
+      .then(function (data) {
+        console.log(data);
+        return job(true);
+      })
+      .catch((error) => console.log(error));
+  </script>
+</html>
