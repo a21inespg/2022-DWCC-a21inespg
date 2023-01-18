@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gatos</title>
+  </head>
+  <body></body>
+  <script>
+    const promesa = fetch(
+      "https://mdn.github.io/learning-area/javascript/oojs/tasks/json/sample.json"
+    );
+
+    promesa
+      .then((response) => {
+        if (response.ok) return response.json();
+        return promesa.reject(response);
+      })
+      .then(function (gatos) {
+        let machos = 0;
+        let femias = 0;
+
+        let nomes = "Os nomes das gatas son";
+
+        let contador = 0;
+        for (let gato of gatos) {
+          contador++;
+          for (let kitten of gato.kittens) {
+            kitten.gender == "f" ? femias++ : machos++;
+          }
+
+          contador == 1
+            ? (nomes = nomes + " e " + gato.name)
+            : (contador == contador) == gatos.length
+            ? (nomes = nomes + " " + gato.name)
+            : (nomes = nomes + ", " + gato.name);
+        }
+        console.log(nomes);
+
+        console.log(
+          "En total hai " +
+            (femias + machos) +
+            " gatiños. Hai " +
+            femias +
+            " femias e " +
+            machos +
+            " machos."
+        );
+      })
+      .catch((error) => console.log("Something went wrong.", error));
+  </script>
+</html>
