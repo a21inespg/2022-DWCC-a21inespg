@@ -28,11 +28,14 @@ let diasSemana = [
   "domingo",
 ];
 
+
+
+
 const isS = (value) => value[value.length - 1] == "s";
 console.log(diasSemana.some(isS));
 console.log(diasSemana.every(isS));
 
-// Exercicio 4
+// // Exercicio 4
 
 let parrafo = " hola que tal chamome ines poses gonzalez";
 // function texto(parrafo) {
