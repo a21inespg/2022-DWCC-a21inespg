@@ -8,13 +8,44 @@
   </head>
   <body></body>
   <script>
-    fetch("https://pokeapi.co/api/v2/pokemon/76")
+    let numero = Math.floor(Math.random() * (1000 - 1) + 1);
+    fetch("https://pokeapi.co/api/v2/pokemon/" + numero)
       .then(function (response) {
-        if (response.ok) return response.json;
+        if (response.ok) return response.json();
         return Promise.reject(response);
       })
       .then(function (poke) {
-        console.log(poke);
+        let h1 = document.createElement("h1");
+        h1.innerHTML = poke.name;
+        document.body.append(h1);
+        let src = poke.sprites.other.home.front_default;
+
+        let img = document.createElement("img");
+        img.setAttribute("src", src);
+        document.body.append(img);
+
+        let habilidades = poke.abilities;
+
+        let lista = document.createElement("ul");
+
+        for (let h of habilidades) {
+          fetch(h.ability.url)
+            .then(function (response) {
+              if (response.ok) return response.json();
+              return Promise.reject(response);
+            })
+            .then((hab) => {
+              for (let ling of hab.names) {
+                if (ling.language.name == "es") {
+                  let elemento = document.createElement("li");
+                  elemento.innerHTML = ling.name;
+                  lista.append(elemento);
+                }
+              }
+            });
+        }
+
+        document.body.append(lista);
       });
   </script>
 </html>
