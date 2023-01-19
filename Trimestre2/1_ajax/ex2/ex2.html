@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Our superheroes</title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Faster+One"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header></header>
+
+    <section></section>
+
+    <script>
+      "use strict";
+      const solicitude = new XMLHttpRequest();
+      solicitude.open(
+        "GET",
+        "https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json"
+      );
+
+      solicitude.send();
+
+      solicitude.addEventListener("load", function () {
+        let resposta = solicitude.response;
+        const heroes = JSON.parse(resposta);
+
+        // HEADER
+        let cabeceira = document.body.querySelector("header");
+        let titulo = document.createElement("h1");
+        titulo.innerHTML = heroes.squadName;
+        let subtitulo = document.createElement("p");
+        subtitulo.innerHTML =
+          "Hometown: " + heroes.homeTown + " // Formed: " + heroes.formed;
+        cabeceira.append(titulo, subtitulo);
+
+        // MEMBERS
+        let seccion = document.body.querySelector("section");
+        for (let heroe of heroes.members) {
+          let article = document.createElement("article");
+          let nomePpal = document.createElement("h2");
+          nomePpal.innerHTML = heroe.name;
+          let nomeSecreto = document.createElement("p");
+          nomeSecreto.innerHTML = "Secret Identity: " + heroe.secretIdentity;
+          let anos = document.createElement("p");
+          anos.innerHTML = "Age: " + heroe.age;
+          let superpoderes = (document.createElement("p").innerHTML =
+            "Superpowers: ");
+          let lista = document.createElement("ul");
+
+          for (let power of heroe.powers) {
+            let elemento = document.createElement("li");
+            elemento.innerHTML = power;
+            lista.append(elemento);
+          }
+          article.append(nomePpal, nomeSecreto, anos, superpoderes, lista);
+
+          seccion.append(article);
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1 class="text-center">O tempo</h1>
+      
+    </div>
+  </body>
+  <script>
+
+    async function f(latitude, lonxitude, nomeLugar) {
+      // Solicitude
+      let response=await fetch("https://api.open-meteo.com/v1/forecast?latitude="+latitude+"&longitude="+lonxitude+"&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min&timezone=Europe%2FBerlin");
+      let datos= await response.json();
+
+      // Carta 
+      let carta=document.createElement("div");
+      carta.setAttribute("class", "card card-body");
+      let titCarta=document.createElement("h5");
+      titCarta.innerHTML=nomeLugar;
+      titCarta.setAttribute("class", "card-title");
+
+
+      
+      // taboa
+      let taboa = document.createElement("table");
+      taboa.setAttribute("class", " table table-responsive")
+      let dias=datos.daily.time;
+
+
+      //dias
+      let contador=0;
+
+      let filaDias=document.createElement("tr");
+      filaDias.setAttribute("class", "table-info")
+      for (dia of dias) {
+
+        if (contador==0) {
+          let td=document.createElement("td");
+          td.innerHTML="#";
+          filaDias.append(td);
+          contador++;
+        }
+        let th=document.createElement("th");
+        th.innerHTML=dia;
+        filaDias.append(th);       
+      }
+
+      contador=0;
+
+      taboa.append(filaDias);
+      console.log(taboa);
+      console.log(dias);
+      console.log(datos.daily);
+
+      //temperaturas reais
+      let maxReal=datos.daily.temperature_2m_max;
+      let minReal=datos.daily.temperature_2m_min;
+      console.log(maxReal);
+
+
+      let filaTReal=document.createElement("tr");
+      
+      for (let i=0; i<maxReal.length; i++) {
+
+        if (contador==0) {
+          let td=document.createElement("td");
+          td.innerHTML="Mín-Max Real (ºC)";
+          filaTReal.append(td);
+          contador++;
+        }
+        let td=document.createElement("td");
+        td.innerHTML=minReal[i]+" <br> "+maxReal[i];
+
+        filaTReal.append(td);
+      }
+      taboa.append(filaTReal);
+      
+      
+      
+      // Appends
+      let container=document.getElementsByClassName("container")[0];
+      carta.append(titCarta);
+      carta.append(taboa);
+      container.append(carta);
+      
+      console.log(document.body);
+    }
+    
+
+    
+    
+
+
+    let latitude="52.09";
+    let lonxitude="5.12";
+
+    f(latitude, lonxitude, "Utrecht");
+
+  </script>
+</html>

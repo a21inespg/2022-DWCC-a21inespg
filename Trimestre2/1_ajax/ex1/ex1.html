@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      let nums;
+      let pepe;
+
+      function escribirNumeros(desde, ata) {
+        nums = desde;
+        for (let i = desde; i < ata; i++) {
+          setTimeout(sumar, 1000, ata);
+        }
+      }
+
+      function escribirNumeros1(desde, ata) {
+        pepe = setInterval(sumar, 1000, ata);
+        nums = desde;
+      }
+
+      function sumar(ata) {
+        if (nums <= ata) {
+          console.log(nums);
+          nums++;
+        }
+        if (nums > ata) {
+          clearInterval(pepe);
+        }
+      }
+
+      escribirNumeros1(2, 6);
+    </script>
+  </body>
+</html>

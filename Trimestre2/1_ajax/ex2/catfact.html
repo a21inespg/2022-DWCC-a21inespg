@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Random dogs</h1>
+    <button>Click here to get a random dog picture</button>
+    <br />
+    <br />
+    <img src="perrito.jpg" style="width: 50%" alt="Random dog pcitura" />
+
+    <script>
+      let boton = document.body.querySelector("button");
+
+      boton.addEventListener("click", function () {
+        const solicitude = new XMLHttpRequest();
+        solicitude.open("GET", "https://dog.ceo/api/breeds/image/random");
+        solicitude.send();
+
+        solicitude.addEventListener("load", function () {
+          console.log("cargado");
+
+          let resposta = JSON.parse(solicitude.response);
+          console.log(resposta);
+          let fotoNova = resposta.message;
+          let imaxe = document.body.querySelector("img");
+          imaxe.setAttribute("src", fotoNova);
+        });
+      });
+
+      const sol2 = new XMLHttpRequest();
+
+      sol2.open(
+        "GET",
+        "https://opendata.aemet.es/opendata/api/prediccion/especifica/municipio/diaria/078",
+        true
+      );
+
+      sol2.onreadystatechange = handler;
+
+      //   sol2.setRequestHeader(
+      //     "ApiKey",
+      //     "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMjFpbmVzcGdAaWVzc2FuY2xlbWVudGUubmV0IiwianRpIjoiY2NjYWI2ZDUtOTNhNS00YzFhLTliY2EtNDJhN2U2MDA4ZDZkIiwiaXNzIjoiQUVNRVQiLCJpYXQiOjE2NzM1MjAyODgsInVzZXJJZCI6ImNjY2FiNmQ1LTkzYTUtNGMxYS05YmNhLTQyYTdlNjAwOGQ2ZCIsInJvbGUiOiIifQ.4bEPVAMsslA1RxUFTTggh8pmgHT98FgFTO_0VvMlWt0"
+      //   );
+      sol2.send();
+
+      sol2.addEventListener("load", function () {
+        console.log("cargado");
+        let devolto = sol2.response;
+        console.log(JSON.parse(devolto));
+      });
+    </script>
+  </body>
+</html>
