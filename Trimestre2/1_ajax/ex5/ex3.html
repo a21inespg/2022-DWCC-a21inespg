@@ -15,99 +15,159 @@
   <body>
     <div class="container mt-5">
       <h1 class="text-center">O tempo</h1>
-      
+      <iframemaps
+        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d6125904.137684312!2d-5.902436000000003!3d41.435660185023686!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2ses!4v1674202007700!5m2!1ses!2ses"
+        width="600"
+        height="450"
+        style="border: 0"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframemaps>
     </div>
   </body>
   <script>
-
-    async function f(latitude, lonxitude, nomeLugar) {
+    async function f(nomeLugar, url) {
       // Solicitude
-      let response=await fetch("https://api.open-meteo.com/v1/forecast?latitude="+latitude+"&longitude="+lonxitude+"&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min&timezone=Europe%2FBerlin");
-      let datos= await response.json();
+      let response = await fetch(url);
+      let datos = await response.json();
 
-      // Carta 
-      let carta=document.createElement("div");
-      carta.setAttribute("class", "card card-body");
-      let titCarta=document.createElement("h5");
-      titCarta.innerHTML=nomeLugar;
+      // Carta
+      let carta = document.createElement("div");
+      carta.setAttribute("class", "card card-body mt-5");
+      let titCarta = document.createElement("h5");
+      titCarta.innerHTML = nomeLugar;
       titCarta.setAttribute("class", "card-title");
 
-
-      
       // taboa
       let taboa = document.createElement("table");
-      taboa.setAttribute("class", " table table-responsive")
-      let dias=datos.daily.time;
-
+      taboa.setAttribute("class", " table text-center table-responsive");
+      let dias = datos.daily.time;
 
       //dias
-      let contador=0;
+      let contador = 0;
 
-      let filaDias=document.createElement("tr");
-      filaDias.setAttribute("class", "table-info")
+      let filaDias = document.createElement("tr");
+      filaDias.setAttribute("class", "table-info");
       for (dia of dias) {
-
-        if (contador==0) {
-          let td=document.createElement("td");
-          td.innerHTML="#";
+        if (contador == 0) {
+          let td = document.createElement("td");
+          td.innerHTML = "";
           filaDias.append(td);
           contador++;
         }
-        let th=document.createElement("th");
-        th.innerHTML=dia;
-        filaDias.append(th);       
+        let date = new Date(dia);
+        let th = document.createElement("th");
+        th.innerHTML =
+          dia.substring(8, dia.length) +
+          "<br>" +
+          date
+            .toLocaleString("default", { month: "short" })
+            .toLocaleUpperCase();
+        filaDias.append(th);
       }
 
-      contador=0;
+      contador = 0;
 
       taboa.append(filaDias);
-      console.log(taboa);
-      console.log(dias);
-      console.log(datos.daily);
 
       //temperaturas reais
-      let maxReal=datos.daily.temperature_2m_max;
-      let minReal=datos.daily.temperature_2m_min;
-      console.log(maxReal);
+      let maxReal = datos.daily.temperature_2m_max;
+      let minReal = datos.daily.temperature_2m_min;
 
+      let filaTReal = document.createElement("tr");
 
-      let filaTReal=document.createElement("tr");
-      
-      for (let i=0; i<maxReal.length; i++) {
-
-        if (contador==0) {
-          let td=document.createElement("td");
-          td.innerHTML="Mín-Max Real (ºC)";
+      for (let i = 0; i < maxReal.length; i++) {
+        if (contador == 0) {
+          let td = document.createElement("td");
+          td.innerHTML = "Mín-Max Real (ºC)";
           filaTReal.append(td);
           contador++;
         }
-        let td=document.createElement("td");
-        td.innerHTML=minReal[i]+" <br> "+maxReal[i];
+        let td = document.createElement("td");
+        td.innerHTML = minReal[i] + " <br> " + maxReal[i];
 
         filaTReal.append(td);
       }
+
+      contador = 0;
       taboa.append(filaTReal);
-      
-      
-      
+
+      // sensación térmica
+      let maxAp = datos.daily.apparent_temperature_max;
+      let minAp = datos.daily.apparent_temperature_min;
+
+      let filaTAp = document.createElement("tr");
+
+      for (let i = 0; i < maxAp.length; i++) {
+        if (contador == 0) {
+          let td = document.createElement("td");
+          td.innerHTML = "Sensación térmica (mín-máx) (ºC)";
+          filaTAp.append(td);
+          contador++;
+        }
+        let td = document.createElement("td");
+        td.innerHTML = minAp[i] + " <br> " + maxAp[i];
+
+        filaTAp.append(td);
+      }
+      taboa.append(filaTAp);
+      contador = 0;
+      // precipitacions
+
+      let precipitacions = datos.daily.precipitation_sum;
+
+      let filaPrep = document.createElement("tr");
+
+      for (let i = 0; i < precipitacions.length; i++) {
+        if (contador == 0) {
+          let td = document.createElement("td");
+          td.innerHTML = "Precipitiacións (mm)";
+          filaPrep.append(td);
+          contador++;
+        }
+        let td = document.createElement("td");
+        td.innerHTML = precipitacions[i];
+
+        filaPrep.append(td);
+      }
+      taboa.append(filaPrep);
+
       // Appends
-      let container=document.getElementsByClassName("container")[0];
+      let container = document.getElementsByClassName("container")[0];
       carta.append(titCarta);
       carta.append(taboa);
       container.append(carta);
-      
-      console.log(document.body);
     }
-    
 
-    
-    
+    let latitudeU = "52.09";
+    let lonxitudeU = "5.12";
+    let urlU =
+      "https://api.open-meteo.com/v1/forecast?latitude=" +
+      latitudeU +
+      "&longitude=" +
+      lonxitudeU +
+      "&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum&timezone=Europe%2FBerlin";
+    f("Utrecht", urlU);
 
+    let latitudeC = "42.26";
+    let lonxitudeC = "-8.78";
+    let urlC =
+      "https://api.open-meteo.com/v1/forecast?latitude=" +
+      latitudeC +
+      "&longitude=" +
+      lonxitudeC +
+      "&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum&timezone=Europe%2FBerlin";
+    f("Cangas", urlC);
 
-    let latitude="52.09";
-    let lonxitude="5.12";
-
-    f(latitude, lonxitude, "Utrecht");
-
+    let latitudeS = "42.88";
+    let lonxitudeS = "-8.55";
+    let urlS =
+      "https://api.open-meteo.com/v1/forecast?latitude=" +
+      latitudeS +
+      "&longitude=" +
+      lonxitudeS +
+      "&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum&timezone=Europe%2FBerlin";
+    f("Santiago", urlS);
   </script>
 </html>
