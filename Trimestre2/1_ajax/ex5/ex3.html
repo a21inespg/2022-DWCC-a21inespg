@@ -11,6 +11,8 @@
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
     />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@latest/dist/Chart.min.js"></script>
   </head>
   <body>
     <div class="container mt-5">
@@ -116,7 +118,7 @@
       // precipitacions
 
       let precipitacions = datos.daily.precipitation_sum;
-
+      console.log("precio" + precipitacions);
       let filaPrep = document.createElement("tr");
 
       for (let i = 0; i < precipitacions.length; i++) {
@@ -132,42 +134,88 @@
         filaPrep.append(td);
       }
       taboa.append(filaPrep);
+      let boton = document.createElement("button");
+      boton.setAttribute(
+        "class",
+        "btn btn-primary col-4  dropdown-toggle " + nomeLugar
+      );
+      boton.innerHTML = "Predición chuva por horas";
 
       // Appends
       let container = document.getElementsByClassName("container")[0];
       carta.append(titCarta);
       carta.append(taboa);
       container.append(carta);
+      carta.append(boton);
     }
 
-    let latitudeU = "52.09";
-    let lonxitudeU = "5.12";
-    let urlU =
-      "https://api.open-meteo.com/v1/forecast?latitude=" +
-      latitudeU +
-      "&longitude=" +
-      lonxitudeU +
-      "&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum&timezone=Europe%2FBerlin";
-    f("Utrecht", urlU);
+    // Array
 
-    let latitudeC = "42.26";
-    let lonxitudeC = "-8.78";
-    let urlC =
-      "https://api.open-meteo.com/v1/forecast?latitude=" +
-      latitudeC +
-      "&longitude=" +
-      lonxitudeC +
-      "&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum&timezone=Europe%2FBerlin";
-    f("Cangas", urlC);
+    let vilas = [
+      { nome: "Utrecht", latitude: "52.09", lonxitude: "5.12" },
+      { nome: "Cangas", latitude: "42.26", lonxitude: "-8.78" },
+      { nome: "Santiago", latitude: "42.88", lonxitude: "-8.55" },
+    ];
 
-    let latitudeS = "42.88";
-    let lonxitudeS = "-8.55";
-    let urlS =
-      "https://api.open-meteo.com/v1/forecast?latitude=" +
-      latitudeS +
-      "&longitude=" +
-      lonxitudeS +
-      "&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum&timezone=Europe%2FBerlin";
-    f("Santiago", urlS);
+    for (vila of vilas) {
+      let url =
+        "https://api.open-meteo.com/v1/forecast?latitude=" +
+        vila.latitude +
+        "&longitude=" +
+        vila.lonxitude +
+        "&hourly=precipitation&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum&timezone=Europe%2FBerlin";
+      f(vila.nome, url);
+    }
+
+    function crearGrafica() {
+      // Obtener una referencia al elemento canvas del DOM
+      const $grafica = document.querySelector("#grafica");
+      // Las etiquetas son las que van en el eje X.
+      const etiquetas = ["enero", "febrero", "marzo", "abril"];
+      // Podemos tener varios conjuntos de datos. Comencemos con uno
+      const datosVentas2020 = {
+        label: "Ventas por mes",
+        data: [5000, 1500, 8000, 5102], // La data es un arreglo que debe tener la misma cantidad de valores que la cantidad de etiquetas
+        backgroundColor: "rgba(54, 162, 235, 0.2)", // Color de fondo
+        borderColor: "rgba(54, 162, 235, 1)", // Color del borde
+        borderWidth: 1, // Ancho del borde
+      };
+      new Chart($grafica, {
+        type: "bar", // Tipo de gráfica
+        data: {
+          labels: etiquetas,
+          datasets: [
+            datosVentas2020,
+            // Aquí más datos...
+          ],
+        },
+        options: {
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true,
+                },
+              },
+            ],
+          },
+        },
+      });
+    }
+
+    document.body.addEventListener("click", (e) => {
+      let boton = e.target;
+
+      if (boton.tagName == "BUTTON") {
+        let grafica = document.createElement("canvas");
+        grafica.setAttribute("id", "grafica");
+        boton.after(grafica);
+        crearGrafica();
+        console.log(boton);
+        if (boton.classList.contains("Cangas")) {
+          console.log("click en cangas");
+        }
+      }
+    });
   </script>
 </html>
