@@ -36,7 +36,7 @@
 
       // Carta
       let carta = document.createElement("div");
-      carta.setAttribute("class", "card card-body mt-5");
+      carta.setAttribute("class", "card card-body mt-5 shadow");
       let titCarta = document.createElement("h5");
       titCarta.innerHTML = nomeLugar;
       titCarta.setAttribute("class", "card-title");
@@ -50,7 +50,11 @@
       let contador = 0;
 
       let filaDias = document.createElement("tr");
-      filaDias.setAttribute("class", "table-info");
+      // filaDias.setAttribute("class", "bg-info");
+      filaDias.setAttribute(
+        "style",
+        "background-color: rgba(54, 162, 235, 0.2);"
+      );
       for (dia of dias) {
         if (contador == 0) {
           let td = document.createElement("td");
@@ -118,7 +122,6 @@
       // precipitacions
 
       let precipitacions = datos.daily.precipitation_sum;
-      console.log("precio" + precipitacions);
       let filaPrep = document.createElement("tr");
 
       for (let i = 0; i < precipitacions.length; i++) {
@@ -137,7 +140,7 @@
       let boton = document.createElement("button");
       boton.setAttribute(
         "class",
-        "btn btn-primary col-4  dropdown-toggle " + nomeLugar
+        "btn btn-primary col-6  dropup dropdown-toggle " + nomeLugar
       );
       boton.innerHTML = "Predición chuva por horas";
 
@@ -163,23 +166,50 @@
         vila.latitude +
         "&longitude=" +
         vila.lonxitude +
-        "&hourly=precipitation&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum&timezone=Europe%2FBerlin";
+        "&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum&timezone=Europe%2FBerlin";
       f(vila.nome, url);
     }
 
-    function crearGrafica() {
+    async function crearGrafica(latitude, lonxitude, nome) {
+      url =
+        "https://api.open-meteo.com/v1/forecast?latitude=" +
+        latitude +
+        "&longitude=" +
+        lonxitude +
+        "&hourly=precipitation&timezone=Europe%2FBerlin";
+
+      let response = await fetch(url);
+      let datos = await response.json();
+
+      let fecha = new Date();
+      let horaCompleta =
+        fecha.toLocaleTimeString("en-US", {
+          hour12: false,
+          hour: "numeric",
+        }) + ":00";
+
+      const containsHour = (element) =>
+        element.substring(11, 16) == horaCompleta;
+      let indexIni = datos.hourly.time.findIndex(containsHour);
+
       // Obtener una referencia al elemento canvas del DOM
-      const $grafica = document.querySelector("#grafica");
+      const $grafica = document.querySelector("#grafica" + nome);
       // Las etiquetas son las que van en el eje X.
-      const etiquetas = ["enero", "febrero", "marzo", "abril"];
+      let arrayEtiquetas = [];
+      datos.hourly.time.forEach((element) => {
+        arrayEtiquetas.push(element.substring(11, 16));
+      });
+      const etiquetas = arrayEtiquetas.slice(indexIni, indexIni + 47); //["enero", "febrero", "marzo", "abril"];
       // Podemos tener varios conjuntos de datos. Comencemos con uno
+
       const datosVentas2020 = {
-        label: "Ventas por mes",
-        data: [5000, 1500, 8000, 5102], // La data es un arreglo que debe tener la misma cantidad de valores que la cantidad de etiquetas
+        label: "Chuva (mm) por horas",
+        data: datos.hourly.precipitation.slice(indexIni, indexIni + 47), // La data es un arreglo que debe tener la misma cantidad de valores que la cantidad de etiquetas
         backgroundColor: "rgba(54, 162, 235, 0.2)", // Color de fondo
         borderColor: "rgba(54, 162, 235, 1)", // Color del borde
         borderWidth: 1, // Ancho del borde
       };
+
       new Chart($grafica, {
         type: "bar", // Tipo de gráfica
         data: {
@@ -207,13 +237,17 @@
       let boton = e.target;
 
       if (boton.tagName == "BUTTON") {
-        let grafica = document.createElement("canvas");
-        grafica.setAttribute("id", "grafica");
-        boton.after(grafica);
-        crearGrafica();
-        console.log(boton);
-        if (boton.classList.contains("Cangas")) {
-          console.log("click en cangas");
+        for (vila of vilas) {
+          if (boton.classList.contains(vila.nome)) {
+            if (document.querySelector("#grafica" + vila.nome) == null) {
+              crearGrafica(vila.latitude, vila.lonxitude, vila.nome);
+              let grafica = document.createElement("canvas");
+              grafica.setAttribute("id", "grafica" + vila.nome);
+              boton.after(grafica);
+            } else {
+              document.querySelector("#grafica" + vila.nome).remove();
+            }
+          }
         }
       }
     });

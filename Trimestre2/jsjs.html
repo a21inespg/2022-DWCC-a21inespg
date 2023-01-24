@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    let fecha = new Date();
+    let horaCompleta =
+      fecha.toLocaleTimeString("en-US", {
+        hour12: false,
+        hour: "numeric",
+      }) + ":00";
+
+    const containsHour = (element) => element.substring(11, 16) == horaCompleta;
+    let indexIni = horas.findIndex(containsHour);
+  </script>
+</html>
