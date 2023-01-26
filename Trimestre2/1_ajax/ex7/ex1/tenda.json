@@ -1,0 +1,26 @@
+{
+  "clientes": [
+    {
+      "telefono": 605,
+      "enderezo": "Serra de Poente",
+      "pedidoTipico": "cahopo"
+    },
+    {
+      "telefono": 698,
+      "enderezo": "Avenida de Marin",
+      "pedidoTipico": "pavo"
+    }
+  ],
+  "pedidos": [
+    {
+      "nome": "cachopo",
+      "telefono": 605,
+      "descricion": "embutido rico"
+    },
+    {
+      "nome": "pavo",
+      "telefono": 698,
+      "descricion": "embutido sano"
+    }
+  ]
+}
