@@ -44,7 +44,7 @@
               class="form-control descricion"
               id="floatingTextarea"
             ></textarea>
-            <button type="button" class="mt-3 btn btn-primary botonTelf">
+            <button type="button" class="mt-3 btn btn-primary botonMod">
               Modificar
             </button>
           </div>
@@ -81,6 +81,18 @@
         textArea.innerHTML = descricion;
       }
 
+      async function modificarDescricion(pedido) {
+        let response = await fetch(
+          `http://localhost:3000/pedidos/?nome=${pedido}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-type": "application/json;charset=utf-8",
+            },
+            body: JSON.stringify(newProduct),
+          }
+        );
+      }
       let botonCliente = document.getElementsByClassName("botonTelf")[0];
       botonCliente.addEventListener("click", () => {
         let telf = document.getElementsByClassName("inpTelf")[0].value;
@@ -89,6 +101,14 @@
         } else {
           console.log("Numero invalido");
         }
+      });
+
+      let botonModificar = document.getElementsByClassName("botonMod")[0];
+      botonModificar.addEventListener("click", () => {
+        let textArea = document.getElementsByClassName("descricion")[0];
+        let pedido = document.getElementsByClassName("pedido")[0].value;
+
+        let novaDescr = textArea.value;
       });
     </script>
   </body>
