@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <title>Formulario</title>
+  </head>
+  <body>
+    <div class="container">
+      <form class="card mt-5 p-4 shadow">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label"
+            >Email address</label
+          >
+          <input
+            type="email"
+            class="form-control email"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+          />
+          <div id="emailHelp" class="form-text">
+            We'll never share your email with anyone else.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control pass"
+            id="exampleInputPassword1"
+          />
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+          <label class="form-check-label" for="exampleCheck1">Pera</label>
+          <br />
+          <input type="checkbox" class="form-check-input" id="exampleCheck2" />
+          <label class="form-check-label" for="exampleCheck2">Mazá</label>
+        </div>
+
+        <div class="mb-3 form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="flexRadioDefault"
+            id="flexRadioDefault1"
+          />
+          <label class="form-check-label" for="flexRadioDefault1">
+            Chocolate
+          </label>
+        </div>
+        <div class="form-check mb-3">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="flexRadioDefault"
+            id="flexRadioDefault2"
+            checked
+          />
+          <label class="form-check-label" for="flexRadioDefault2">
+            Churros
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      function storageAvailable(type) {
+        let storage;
+        try {
+          storage = window[type];
+          const x = "__storage_test__";
+          storage.setItem(x, x);
+          storage.removeItem(x);
+          return true;
+        } catch (e) {
+          return (
+            e instanceof DOMException &&
+            (e.code === 22 ||
+              e.code === 1014 ||
+              e.name === "QuotaExceededError" ||
+              e.name === "NS_ERROR_DOM_QUOTA_REACHED") &&
+            storage &&
+            storage.length !== 0
+          );
+        }
+      }
+      function getData() {
+        let email = document.getElementsByClassName("email")[0].value;
+        let pass = document.getElementsByClassName("pass")[0].value;
+        let inputs = document.getElementsByClassName("form-check-input");
+        let seleccions = [];
+        for (input of inputs) {
+          if (input.checked) {
+            seleccions.push(input.nextElementSibling.innerText);
+          }
+        }
+        localStorage.setItem(
+          "usuario",
+          JSON.stringify({
+            name: email,
+            password: pass,
+            comida: seleccions,
+          })
+        );
+
+        let user = JSON.parse(localStorage.getItem("usuario"));
+        console.log(user);
+      }
+      let boton = document.getElementsByClassName("btn btn-primary")[0];
+      boton.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        if (storageAvailable("localStorage") == true) {
+          localStorage.removeItem("usuario");
+          getData();
+        } else {
+          getData();
+        }
+      });
+    </script>
+  </body>
+</html>
