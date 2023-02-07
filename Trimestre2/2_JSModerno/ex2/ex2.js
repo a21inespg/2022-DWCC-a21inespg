@@ -64,7 +64,7 @@ formulario.style.display = "none";
 
 formulario.addEventListener("keypress", (e) => {
   if (e.key == "Enter") {
-    marker.addTo(map);
+    map.addLayer(marker);
     marcadores.push(marker);
     e.preventDefault();
     let descricion = input.value;
@@ -108,18 +108,17 @@ document.body.addEventListener("click", (e) => {
 
   if (bot.tagName == "BUTTON") {
     if (bot.classList.contains("btn-close")) {
-      console.log(arrayObxectos);
+      
 
       for (obx of arrayObxectos) {
         if (bot.classList.contains(obx.nome.replaceAll(" ", "_"))) {
           let index = arrayObxectos.indexOf(obx);
           if (index > -1) {
             arrayObxectos.splice(index, 1);
-
             let marc = marcadores.splice(index, 1);
-            console.log("marc ");
             console.log(marc);
-            marc.remove(map);
+            map.removeLayer(marc[0]);
+            
           }
 
           // card mb-2 shadow
@@ -135,34 +134,47 @@ document.body.addEventListener("click", (e) => {
   }
 });
 
-if ("geolocation" in navigator) {
-  /* geolocation is available */
-  navigator.geolocation.getCurrentPosition(
-    function (posicion) {
-      // desestruturación de obxectos
-      const { latitude, longitude } = posicion.coords;
-      map = L.map("map").setView([latitude, longitude], 8);
-      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        maxZoom: 19,
-        attribution:
-          '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      }).addTo(map);
-      map.on("click", onMapClick);
-    },
-    function (error) {
-      console.log(`ERROR(${error.code}): ${error.message}`);
-    }
-  );
-} else {
-  /* geolocation IS NOT available */
+ async function crearMapa() {
+  if ("geolocation" in navigator) {
+    
+    navigator.geolocation.getCurrentPosition(
+      function (posicion) {
+        const { latitude, longitude } = posicion.coords;
+         map = L.map("map").setView([latitude, longitude], 8);
+        L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 19,
+          attribution:
+            '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        }).addTo(map);
+        map.on("click", onMapClick);
+        console.log(map);
+        iniciar();
+      },
+      function (error) {
+        console.log(`ERROR(${error.code}): ${error.message}`);
+      }
+    );
+  } else {
+   }
+   return 1;
 }
 
-let puntos = JSON.parse(localStorage.getItem("puntos"));
+crearMapa();
+
+function iniciar() {
+  let puntos = JSON.parse(localStorage.getItem("puntos"));
 if (puntos != null) {
   puntos = JSON.parse(localStorage.getItem("puntos"));
+  arrayObxectos=puntos;
   for (punto of puntos) {
     crearCarta(punto.nome, punto.latitude, punto.lonxitude);
+    let marcador= L.marker([punto.latitude, punto.lonxitude]);
+    map.addLayer(marcador);
+    marcadores.push(marcador);
+
   }
+}
+
 }
 
 // localStorage.removeItem("puntos");
