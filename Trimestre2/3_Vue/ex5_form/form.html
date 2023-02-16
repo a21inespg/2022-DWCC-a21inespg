@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form</title>
+  </head>
+  <body>
+    <div id="app">
+      <form action="">
+        <input type="text" /> <br />
+        <br />
+        <textarea v-model="text" name="" id="" cols="30" rows="10"></textarea>
+        <br />
+        <b>Textarea: </b>
+        <div>{{text}}</div>
+        <br />
+        <br />
+
+        <div>Picked: {{ picked }}</div>
+        <input type="radio" id="opA" value="Opción A" v-model="picked" />
+        <label for="opA">Opción A</label>
+
+        <input type="radio" id="opB" value="Opción B" v-model="picked" />
+        <label for="opB">Opción B</label>
+
+        <div>CheckA: {{ checkedA }}</div>
+        <input type="checkbox" id="checkbox" v-model="checkedA" />
+        <label for="checkbox">Check A</label>
+        <div>CheckA: {{ checkedB }}</div>
+        <input type="checkbox" id="checkbox" v-model="checkedB" />
+        <label for="checkbox">Check B</label>
+
+        <div>Selected: {{ selected }}</div>
+        <select v-model="selected" name="frutas" id="">
+          <option>A</option>
+          <option>B</option>
+          <option>C</option>
+        </select>
+<br>
+        <button>Reset</button>
+      </form>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const aplicacion = Vue.createApp({
+        data() {
+          return {
+            picked: "Opción A",
+            checkedA: false,
+            checkedB: false,
+            selected: "C",
+            text: "",
+          };
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

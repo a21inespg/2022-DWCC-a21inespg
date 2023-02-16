@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Watchers</title>
+  </head>
+  <body>
+    <div id="app">
+      <textarea v-model="valor1" name="" id="" cols="30" rows="10">
+{{ valor1 }}</textarea
+      >
+      <br />
+      <textarea v-model="valor2" name="" id="" cols="30" rows="10">
+{{valor2}}</textarea
+      >
+
+      <br />
+      <p v-if="!this.resposta">Non introduciches valores aínda</p>
+      <p v-else>A suma é: {{ resposta }}</p>
+      <p v-if="this.resposta">O número {{parImpar}}</p>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            valor1: 0,
+            valor2: 0,
+            resposta: null,
+          };
+        },
+        watch: {
+          valor1() {
+            this.sumar();
+          },
+          valor2() {
+            this.sumar();
+          },
+        },
+
+        computed: {
+          parImpar() {
+            return this.resposta % 2 == 0 ? "é par" : "é impar";
+          },
+        },
+
+        methods: {
+          sumar() {
+            this.resposta = parseInt(this.valor1) + parseInt(this.valor2);
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

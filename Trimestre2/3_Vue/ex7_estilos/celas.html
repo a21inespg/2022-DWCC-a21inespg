@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taboa</title>
+    <style>
+      td {
+        height: 50px;
+        width: 50px;
+        border: 1px solid black;
+      }
+
+      body {
+        margin: 2em;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Clica nas celas</h1>
+      <table @click="changeColor($event)">
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const app = Vue.createApp({
+        methods: {
+          changeColor(e) {
+            if ((e.target.tagName = "TD")) {
+              let color =
+                "#" + Math.floor(Math.random() * 16777215).toString(16);
+              e.target.style.background = color;
+            }
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
