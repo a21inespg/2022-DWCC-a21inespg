@@ -17,7 +17,9 @@
       >
 
       <br />
-      <p v-if="!this.resposta">Non introduciches valores aínda</p>
+      <p v-if="!this.resposta">
+        Non introduciches valores aínda ou un deles é null
+      </p>
       <p v-else>A suma é: {{ resposta }}</p>
       <p v-if="this.resposta">O número {{parImpar}}</p>
     </div>
@@ -26,8 +28,8 @@
       const app = Vue.createApp({
         data() {
           return {
-            valor1: 0,
-            valor2: 0,
+            valor1: null,
+            valor2: null,
             resposta: null,
           };
         },

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="novaTarefa" />
+      <button @click="engadirTarefa">Engadir tarefa</button>
+      <p v-if="tarefas.length === 0">Aínda non hai tarefas</p>
+      <ul v-else>
+        <li
+          v-for="(tarefa, index) in tarefas"
+          :key="tarefa"
+          @click="borrarTarefa(index)"
+        >
+          <p>{{tarefa}} - {{index}}</p>
+          <input type="text" @click.stop />
+        </li>
+      </ul>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            novaTarefa: "",
+            tarefas: [],
+          };
+        },
+        methods: {
+          engadirTarefa() {
+            this.tarefas.push(this.novaTarefa);
+          },
+          borrarTarefa(index) {
+            this.tarefas.splice(index, 1);
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
