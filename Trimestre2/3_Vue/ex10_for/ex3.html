@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Compra</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Lista da compra</h1>
+      <button @click="cambiarVisibilidade">Mostrar/Ocultar</button> <br />
+      <br />
+      <input type="text" v-model="novoProduto" />
+      <button @click="engadir">Engadir</button>
+      <ul v-show="mostrar">
+        <li @click="remove(produto)" v-for="produto in compra ">
+          {{ produto }}
+        </li>
+      </ul>
+    </div>
+  </body>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          compra: ["atun", "champis", "iogures"],
+          novoProduto: "",
+          mostrar: true,
+        };
+      },
+      methods: {
+        engadir() {
+          this.compra.push(this.novoProduto);
+          this.novoProduto = "";
+        },
+        cambiarVisibilidade() {
+          this.mostrar == true ? (this.mostrar = false) : (this.mostrar = true);
+        },
+        remove(produto) {
+          this.compra = this.compra.filter((c) => c != produto);
+        },
+      },
+    }).mount("#app");
+  </script>
+</html>
