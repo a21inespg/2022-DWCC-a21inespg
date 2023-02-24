@@ -34,22 +34,26 @@
           </div>
         </div>
       </section>
-      <section class="container">
+      <section v-show="resultado" class="container">
         <h2>Fin partida!</h2>
-        <h3>Perdiches!</h3>
-        <h3>Ganaches</h3>
-        <h3>Empate</h3>
-        <button>Novo xogo</button>
+        <h3 v-show="lost">Perdiches!</h3>
+        <h3 v-show="win">Ganaches</h3>
+        <h3 v-show="empate">Empate</h3>
+        <button @click="novoXogo">Novo xogo</button>
       </section>
-      <section id="controls">
+      <section v-show="controls" id="controls">
         <button @click="ataque">ATAQUE</button>
-        <button>ATAQUE ESPECIAL</button>
-        <button>CURACIÓN</button>
-        <button>RENDERSE</button>
+        <button @click="ataqueEspecial" :disabled="isDisabled">
+          ATAQUE ESPECIAL
+        </button>
+        <button @click="curacion">CURACIÓN</button>
+        <button @click="rendido">RENDERSE</button>
       </section>
       <section id="log" class="container">
         <h2>Rexistro da batalla</h2>
-        <ul></ul>
+        <ul id="lista">
+          
+        </ul>
       </section>
     </div>
   </body>
