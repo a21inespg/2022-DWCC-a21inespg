@@ -1,33 +1,25 @@
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
-import ChildComponent from "./components/ChildComponent.vue";
+import OlaMundo from "./components/OlaMundo.vue";
 
 export default {
-  // Escribir as opcións do compoñente: data, methods, watch, ...
-  data() {
-    return {
-      count: 0,
-    };
-  },
-  // rexistro do compoñente
   components: {
-    ChildComponent,
+    OlaMundo,
   },
 };
 </script>
 
 <template>
-  <div>
+  <!-- <div>
     <a href="https://vitejs.dev" target="_blank">
       <img src="/vite.svg" class="logo" alt="Vite logo" />
     </a>
     <a href="https://vuejs.org/" target="_blank">
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
-  </div>
-  <ChildComponent></ChildComponent>
-  <ChildComponent></ChildComponent>
-  <ChildComponent></ChildComponent>
+  </div> -->
+
+  <OlaMundo />
 </template>
 
 <style scoped>
