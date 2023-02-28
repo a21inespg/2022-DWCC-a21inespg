@@ -1,9 +1,19 @@
 <script>
-export default {};
+import { transform } from "@vue/compiler-core";
+
+export default {
+  data() {
+    return {
+      count: 0,
+    };
+  },
+};
 </script>
 
 <template>
-  <button>Contador: {{ count }}</button>
+  <br />
+  <br />
+  <button @click="count++">Contador: {{ count }}</button>
 </template>
 
 <style></style>

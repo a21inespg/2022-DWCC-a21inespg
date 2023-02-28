@@ -1,10 +1,11 @@
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
 import OlaMundo from "./components/OlaMundo.vue";
-
+import Contador from "./components/Contador.vue";
 export default {
   components: {
     OlaMundo,
+    Contador,
   },
 };
 </script>
@@ -20,6 +21,9 @@ export default {
   </div> -->
 
   <OlaMundo />
+  <Contador />
+  <Contador />
+  <Contador></Contador>
 </template>
 
 <style scoped>
