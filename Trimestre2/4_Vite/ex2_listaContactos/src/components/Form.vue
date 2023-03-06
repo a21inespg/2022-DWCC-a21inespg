@@ -33,7 +33,7 @@ export default {
   </form>
 </template>
 
-<style>
+<style scoped>
 form {
   text-align: center;
 }
