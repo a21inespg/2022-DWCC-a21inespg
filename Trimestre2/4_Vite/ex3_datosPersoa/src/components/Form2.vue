@@ -3,8 +3,8 @@ export default {
   emits: ["cambioInfo"],
   data() {
     return {
-      name: "",
-      year: "",
+      name: this.nome,
+      year: this.ano,
     };
   },
   props: {
@@ -25,9 +25,9 @@ export default {
     <fieldset>
       <legend>Introduce os teus datos</legend>
       <label for="nom">Nome: </label> <br />
-      <input :value="nome" id="nom" @input="cambio" /> <br />
+      <input v-model="name" id="nom" @input="cambio" /> <br />
       <label for="ano">Ano de nacemento: </label> <br />
-      <input :value="ano" id="ano" @input="cambio" /> <br />
+      <input v-model="year" id="ano" @input="cambio" /> <br />
     </fieldset>
   </form>
 </template>

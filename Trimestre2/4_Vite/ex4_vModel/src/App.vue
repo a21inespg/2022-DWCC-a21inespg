@@ -2,6 +2,20 @@
 import Botons from "./components/Botons.vue";
 
 export default {
+  data() {
+    return {
+      selected: "",
+    };
+  },
+
+  methods: {
+    mostrar() {
+      console.log("Valor seleccionado: " + this.selected);
+    },
+    cambiarSelected(value) {
+      this.selected = value;
+    },
+  },
   components: {
     Botons,
   },
@@ -10,8 +24,9 @@ export default {
 
 <template>
   <form>
+    <!-- <Botons @update:modelValue="cambiarSelected"></Botons> -->
     <Botons v-model="selected"></Botons>
-    <button>Enviar</button>
+    <button @click.prevent="mostrar">Enviar</button>
   </form>
 </template>
 
