@@ -1,7 +1,6 @@
 <script>
-import RecursoWeb from "./components/RecursoWeb.vue";
 import Form from "./components/Form.vue";
-
+import ConxuntoRecursosWeb from "./components/ConxuntoRecursosWeb.vue";
 export default {
   data() {
     return {
@@ -18,7 +17,7 @@ export default {
         },
       ],
 
-      currentTab: "RecursoWeb",
+      currentTab: "ConxuntoRecursosWeb",
     };
   },
 
@@ -26,16 +25,26 @@ export default {
     cambiarTab(e) {
       e.preventDefault();
       if (e.target.id == "periodicos") {
-        this.currentTab = "RecursoWeb";
+        this.currentTab = "ConxuntoRecursosWeb";
       } else if (e.target.id == "form") {
         this.currentTab = "Form";
       }
     },
+
+    engadirNovoRexistro(tit, desc, link) {
+      this.recursosWeb.push({
+        titulo: tit,
+        descricion: desc,
+        href: link,
+      });
+
+      this.currentTab = "ConxuntoRecursosWeb";
+    },
   },
 
   components: {
-    RecursoWeb,
     Form,
+    ConxuntoRecursosWeb,
   },
 };
 </script>
@@ -55,11 +64,13 @@ export default {
   </div>
 
   <div class="contido">
-    <component :is="currentTab">
-      <template v-slot:titulo> </template>
-      <template v-slot:descricion> </template>
-      <template v-slot:link> </template>
-    </component>
+    <KeepAlive>
+      <component
+        @novo-rexistro="engadirNovoRexistro"
+        :is="currentTab"
+        :arrayRecursos="recursosWeb"
+      ></component>
+    </KeepAlive>
   </div>
 </template>
 
@@ -95,6 +106,4 @@ a {
 a:hover {
   color: rgb(197, 166, 171);
 }
-
-
 </style>
