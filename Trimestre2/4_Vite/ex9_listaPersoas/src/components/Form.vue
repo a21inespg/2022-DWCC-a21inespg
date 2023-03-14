@@ -2,28 +2,45 @@
 export default {
   data() {
     return {
-      nome: this.nomeProp,
-      apelido: this.apelidoProp,
+      nome: "",
+      apelido: "",
+      id: null,
     };
   },
+  // computed: {
+  //   nome() {
+  //     return this.nomeProp;
+  //   },
+  //   apelido() {
+  //     return this.apelidoProp;
+  //   },
+  //   id() {
+  //     return this.idProp;
+  //   },
+  // },
 
   props: {
     nomeProp: String,
     apelidoProp: String,
+    idProp: Number,
   },
   methods: {
     novaPersoa(e) {
       e.preventDefault();
       this.$emit("engadirPersoa", this.nome, this.apelido);
     },
+    eliminarPersoa(e) {
+      e.preventDefault();
+      this.$emit("eliminarPersoa", this.id);
+    },
   },
   updated() {
-    console.log("updated");
-    console.log(this.nomeProp);
-    console.log(this.nome);
+    this.nome = this.nomeProp;
+    this.apelido = this.apelidoProp;
+    this.id = this.idProp;
   },
 
-  emits: ["engadirPersoa"],
+  emits: ["engadirPersoa", "eliminarPersoa"],
 };
 </script>
 
@@ -42,6 +59,6 @@ export default {
     <br />
     <button>Actualizar</button>
     <button @click="novaPersoa">Engadir</button>
-    <button>Borrar</button>
+    <button @click="eliminarPersoa">Borrar</button>
   </form>
 </template>

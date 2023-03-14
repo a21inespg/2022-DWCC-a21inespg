@@ -13,6 +13,7 @@ export default {
       id: 3,
       nomeParaForm: "",
       apelidoParaForm: "",
+      idParaForm: null,
     };
   },
   components: {
@@ -35,13 +36,10 @@ export default {
     },
 
     mostrarSeleccion(idEnviado) {
-      console.log("mostro seleccion");
       let persoaAtopada =
         this.persoas[this.persoas.findIndex((p) => p.id == idEnviado)];
-      console.log(persoaAtopada);
-
+      this.idParaForm = persoaAtopada.id;
       this.apelidoParaForm = persoaAtopada.apelido;
-      console.log(this.apelidoParaForm);
       this.nomeParaForm = persoaAtopada.nome;
     },
 
@@ -49,6 +47,15 @@ export default {
       this.id = this.id + 1;
       this.persoas.push({ id: this.id, apelido: apelidoN, nome: nomeN });
       console.log(this.persoas);
+    },
+    eliminarP(id) {
+      this.persoas = this.persoas.filter((p) => p.id != id);
+      // console.log(index);
+      // this.persoas = this.persoas.splice(index, 1);
+      // console.log(this.persoas);
+      this.idParaForm = null;
+      this.apelidoParaForm = "";
+      this.nomeParaForm = "";
     },
   },
 };
@@ -63,7 +70,9 @@ export default {
   <Form
     :nome-prop="nomeParaForm"
     :apelido-prop="apelidoParaForm"
+    :id-prop="idParaForm"
     @engadir-persoa="engadirNova"
+    @eliminar-persoa="eliminarP"
   ></Form>
 </template>
 
