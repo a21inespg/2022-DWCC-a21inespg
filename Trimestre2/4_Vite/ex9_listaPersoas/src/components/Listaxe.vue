@@ -9,12 +9,12 @@ export default {
     lista: Array,
   },
 
-  emits: ["filtrando"],
+  emits: ["filtrando", "seleccionando"],
 };
 </script>
 
 <template>
-  <div style="width: 10rem">
+  <div style="width: 10rem; margin: auto">
     <input
       @input="$emit('filtrando', buscador)"
       type="text"
@@ -24,8 +24,12 @@ export default {
     />
     <br />
     <br />
-    <select name="persoas" id="" size="3" style="width: 100%">
-      <option v-for="item in lista" :value="item.apelido">
+    <select name="persoas" id="" size="4" style="width: 100%">
+      <option
+        v-for="item in lista"
+        @click="$emit('seleccionando', item.id)"
+        :value="item.id"
+      >
         {{ item.apelido }}, {{ item.nome }}
       </option>
     </select>

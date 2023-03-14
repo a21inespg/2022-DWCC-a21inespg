@@ -6,10 +6,13 @@ export default {
   data() {
     return {
       persoas: [
-        { apelido: "Lovelace", nome: "Ada" },
-        { apelido: "Pérez", nome: "María" },
-        { apelido: "González", nome: "Jose" },
+        { id: 1, apelido: "Lovelace", nome: "Ada" },
+        { id: 2, apelido: "Pérez", nome: "María" },
+        { id: 3, apelido: "González", nome: "Jose" },
       ],
+      id: 3,
+      nomeParaForm: "",
+      apelidoParaForm: "",
     };
   },
   components: {
@@ -18,14 +21,33 @@ export default {
   },
   methods: {
     filtrarPersoas(letras) {
-      let regex = new RegExp("^" + letras + "", "i");
-      console.log(regex);
-      console.log(regex.test("lovelace"));
-      let persoasFiltradas = [];
-      persoasFiltradas = this.persoas.filter((persoa) =>
-        regex.test(persoa.apelido)
-      );
+      console.log("wmirto");
+      if (letras != "") {
+        let regex = new RegExp("^" + letras + "", "i");
+        console.log(regex);
+        console.log(regex.test("gonzalez"));
+        let persoasFiltradas = [];
+        persoasFiltradas = this.persoas.filter((persoa) =>
+          regex.test(persoa.apelido)
+        );
+        console.log(persoasFiltradas);
+      }
+    },
 
+    mostrarSeleccion(idEnviado) {
+      console.log("mostro seleccion");
+      let persoaAtopada =
+        this.persoas[this.persoas.findIndex((p) => p.id == idEnviado)];
+      console.log(persoaAtopada);
+
+      this.apelidoParaForm = persoaAtopada.apelido;
+      console.log(this.apelidoParaForm);
+      this.nomeParaForm = persoaAtopada.nome;
+    },
+
+    engadirNova(nomeN, apelidoN) {
+      this.id = this.id + 1;
+      this.persoas.push({ id: this.id, apelido: apelidoN, nome: nomeN });
       console.log(this.persoas);
     },
   },
@@ -33,7 +55,16 @@ export default {
 </script>
 
 <template>
-  <Listaxe @filtrando="filtrarPersoas" :lista="persoas"></Listaxe>
+  <Listaxe
+    @seleccionando="mostrarSeleccion"
+    @filtrando="filtrarPersoas"
+    :lista="persoas"
+  ></Listaxe>
+  <Form
+    :nome-prop="nomeParaForm"
+    :apelido-prop="apelidoParaForm"
+    @engadir-persoa="engadirNova"
+  ></Form>
 </template>
 
 <style scoped>
